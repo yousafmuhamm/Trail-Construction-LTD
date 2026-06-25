@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/*
+  Trail Construction Ltd. — design tokens
+  Dark anchors: near-black charcoal + deep forest green.
+  Light sections: off-white. Single accent green for buttons / icons / accent bars.
+*/
+@theme {
+  /* Brand + neutrals — "Warm Forest": deep green-blacks, a richer brand green,
+     warmed off-white neutrals to echo the timber/wood tones, plus a brass accent
+     for small premium touches. */
+  --color-charcoal: #0e1410; /* warm near-black — hero / dark sections */
+  --color-forest: #14271c; /* deep forest green — process band */
+  --color-forest-700: #1e3a2a; /* lighter forest for hairlines on dark */
+
+  --color-brand: #1a7a40; /* richer accent green — buttons, icons (white text passes AA) */
+  --color-brand-hover: #156a36; /* darker green on hover */
+  --color-brand-soft: #79d3a0; /* light green for labels/icons on dark backgrounds */
+
+  /* Brass accent — used sparingly for eyebrow bars, hover details, stat icons. */
+  --color-brass: #c79a4b;
+  --color-brass-soft: #d9b878;
+
+  --color-paper: #f4f2ec; /* warm off-white section background */
+  --color-paper-dim: #ebe8df; /* slightly dimmer warm panel on light */
+  --color-ink: #181a17; /* warm near-black body text on light */
+  --color-ink-soft: #565b52; /* warm muted text on light */
+  --color-line: #e1ddd2; /* warm hairline borders on light */
+
+  --color-cream: #f3f2ec; /* primary text on dark */
+  --color-cream-soft: #bbc4ba; /* muted text on dark */
+
+  /* Type families (wired to next/font variables in layout.tsx) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* NOTE: do not name this --font-display; that collides with the CSS
+     `font-display` descriptor in Tailwind v4 and the utility won't generate. */
+  --font-heading: var(--font-fraunces), Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* offset anchor targets so the sticky nav doesn't cover headings */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Tidier line wrapping: balanced headings, pretty body copy. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Remove tap delay / make interactions feel instant on touch. */
+  a,
+  button,
+  select,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-brand) 30%, transparent);
+  }
+}
+
+@layer utilities {
+  /*
+    Scroll-reveal: hidden + nudged down at rest, transitions in when JS adds
+    `.is-visible`. A <noscript> override in the layout forces these visible when
+    JS is unavailable, so the reveal is purely additive polish, never a content gate.
+  */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Respect reduced-motion: no transforms, no smooth scroll, instant reveal */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
