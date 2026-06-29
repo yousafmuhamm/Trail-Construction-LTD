@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Icon } from "./Icon";
 import { projects, business, type Project } from "@/lib/content";
@@ -49,9 +50,12 @@ export function ProjectModal({
 
   const titleId = "project-modal-title";
 
-  return (
+  // Render through a portal to document.body so the fixed overlay escapes any
+  // ancestor that establishes a containing block (e.g. the Reveal wrapper's
+  // will-change/transform), and truly covers the viewport.
+  const content = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
@@ -68,7 +72,7 @@ export function ProjectModal({
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="relative z-10 flex h-[94svh] w-full max-w-[1320px] flex-col overflow-y-auto rounded-2xl shadow-2xl outline-none lg:flex-row lg:overflow-hidden"
+        className="relative z-10 flex h-[90svh] w-[92vw] max-w-[1480px] flex-col overflow-y-auto rounded-2xl shadow-2xl outline-none lg:h-[81svh] lg:w-[82vw] lg:flex-row lg:overflow-hidden"
       >
         {/* ── Info side (dark) ───────────────────────────── */}
         <div className="flex shrink-0 flex-col bg-forest p-7 text-cream sm:p-10 lg:w-[42%] lg:overflow-y-auto">
@@ -208,4 +212,6 @@ export function ProjectModal({
       </div>
     </div>
   );
+
+  return createPortal(content, document.body);
 }
