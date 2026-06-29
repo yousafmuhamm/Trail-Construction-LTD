@@ -138,95 +138,94 @@ export const projects = {
     "Here's the kind of structural carpentry we do day to day: beams, framing, additions, and renovations built to spec.",
   link: { label: "View All Projects", href: "#contact" },
   detailCta: { label: "Request a Quote", href: "#contact" },
-  // All images are placeholders — replace with real Trail project photos.
+  // Real Trail Construction job photos, sourced from the company's own work archive.
   items: [
     {
-      title: "Open Concept Beam Installation",
-      location: "Calgary, AB",
-      year: "2024",
-      scope: ["Beam Installation", "Load-Bearing Wall Removal", "Finishing"],
+      title: "Custom Home Framing",
+      location: "Central Alberta",
+      year: "2021",
+      scope: ["Custom Framing", "New Build", "Roof Systems"],
       description:
-        "A cramped main floor became one open great room. We sized and set a flush LVL beam to carry the second storey, then took out the load-bearing wall underneath it and tied everything back into the existing structure. There are no posts in the way and no drop in the ceiling line, just a clean open span the family can actually use.",
+        "Full structural framing for custom homes, from the main floor up to complex roofs. This build included round turrets and a barrel-vault roof, all framed to the plans and left square and true for the trades that followed. We frame new builds, additions, and everything in between.",
       image: {
-        src: "/images/project-beam-install.jpg",
-        alt: "Open-concept interior with an exposed structural beam and loft",
+        src: "/images/work/framing-custom.jpg",
+        alt: "Large custom home being framed, with round turrets and a barrel-vault roof",
       },
       gallery: [
-        { src: "/images/project-beam-install.jpg", alt: "Open-concept interior with an exposed structural beam" },
-        { src: "/images/interior-feature-wall.jpg", alt: "Finished open-plan living and kitchen with a timber feature wall" },
-        { src: "/images/hero-structural.jpg", alt: "Reviewing the structural plans before the beam install" },
+        { src: "/images/work/framing-custom.jpg", alt: "Custom home framing with turrets against a blue sky" },
+        { src: "/images/work/framing-arch.jpg", alt: "Curved glulam roof framing inside a custom build" },
+        { src: "/images/work/framing-mezzanine.jpg", alt: "Framed mezzanine with a finished wood railing" },
       ],
       size: "large",
     },
     {
-      title: "Two-Storey Addition",
+      title: "Beam Installation & Wall Removal",
+      location: "Calgary, AB",
+      year: "2022",
+      scope: ["Beam Installation", "Load-Bearing Wall Removal", "Steel & LVL"],
+      description:
+        "We pulled the wall between the kitchen and living room and carried the load on a new beam, so the main floor reads as one open room. On other jobs we set flush steel and LVL beams right up into the joists, which keeps the ceiling line clean with no posts in the way. Every beam is sized for the load it carries.",
+      image: {
+        src: "/images/work/beam-open.jpg",
+        alt: "Open main floor with a dropped beam after a load-bearing wall removal",
+      },
+      gallery: [
+        { src: "/images/work/beam-open.jpg", alt: "Open-concept main floor with a dropped beam and brick fireplace" },
+        { src: "/images/work/beam-steel.jpg", alt: "Flush black steel beam set up into the floor joists" },
+        { src: "/images/work/beam-joist.jpg", alt: "Steel beam on a support post carrying the ceiling joists" },
+      ],
+      size: "small",
+    },
+    {
+      title: "Structural Renovation & Support Posts",
+      location: "Calgary, AB",
+      year: "2023",
+      scope: ["Structural Renovation", "Support Posts", "Footing Pads"],
+      description:
+        "When a floor sags or an owner wants a more open layout, we go back to the structure. That means new steel support posts, fresh concrete footing pads poured under them, and reframed openings to carry the new loads. We get the support solid first, then the rest of the renovation can happen.",
+      image: {
+        src: "/images/work/reno-home.jpg",
+        alt: "Mid-century home exterior during a structural renovation",
+      },
+      gallery: [
+        { src: "/images/work/reno-home.jpg", alt: "Mid-century Calgary home during structural renovation" },
+        { src: "/images/work/reno-posts.jpg", alt: "New steel support posts carrying a beam in a basement" },
+        { src: "/images/work/reno-footing.jpg", alt: "Rebar in a new concrete footing pad before the pour" },
+      ],
+      size: "small",
+    },
+    {
+      title: "Custom Decks & Railings",
       location: "Olds, AB",
-      year: "2023",
-      scope: ["Framing", "Additions", "Excavation"],
+      year: "2019",
+      scope: ["Decks", "Railings", "Stairs"],
       description:
-        "A full two-storey addition on an acreage home, from the footings up to the roofline. We did the excavation and foundation prep, framed the new structure square and true, and tied it into the original house so the addition looks like it was always part of the place.",
+        "Cedar decks built to last, with clean railings and a layout that suits how the family actually uses the yard. We handle the framing, the decking, and the rail work, including the metal spindles, so the finished deck is solid underfoot and easy to look at.",
       image: {
-        src: "/images/project-addition.jpg",
-        alt: "Modern timber-clad home addition at dusk",
+        src: "/images/work/deck-cedar.jpg",
+        alt: "Cedar deck with metal-spindle railing overlooking open Alberta land",
       },
       gallery: [
-        { src: "/images/project-addition.jpg", alt: "Modern timber-clad home addition" },
-        { src: "/images/addition-exterior-dusk.jpg", alt: "Completed timber-clad addition lit up at dusk" },
-        { src: "/images/interior-open-living.jpg", alt: "Open living space inside the finished addition" },
+        { src: "/images/work/deck-cedar.jpg", alt: "Cedar deck with a metal-spindle railing and rural view" },
+        { src: "/images/work/deck-lounge.jpg", alt: "Finished cedar deck with patio furniture and a treeline view" },
       ],
       size: "small",
     },
     {
-      title: "Custom New-Build Framing",
+      title: "Excavation & Site Prep",
       location: "Central Alberta",
-      year: "2023",
-      scope: ["Custom Framing", "New Build"],
+      year: "2021",
+      scope: ["Excavation", "Site Prep", "Skid Steer"],
       description:
-        "Full structural framing for a custom country home. That meant engineered floor systems, tall wall framing, and a complicated roof, all built to the plans and ready for the trades that came after us. We kept the tolerances tight and the site clean the whole way through.",
+        "We run our own skid steer and excavator for the dirt work that comes before the build. Post holes, footings, grading, and general site prep, done on our own schedule so the framing crew is not waiting on anyone. Handy on acreages and tight city lots alike.",
       image: {
-        src: "/images/project-framing.jpg",
-        alt: "Crew framing the structure of a new build",
+        src: "/images/work/excavation-auger.jpg",
+        alt: "Skid steer with an auger attachment drilling holes on an acreage",
       },
       gallery: [
-        { src: "/images/project-framing.jpg", alt: "Crew framing the structure of a new build" },
-        { src: "/images/addition-exterior-dusk.jpg", alt: "The framed home after exterior cladding" },
-        { src: "/images/hero-structural.jpg", alt: "Framing plans on the workbench" },
-      ],
-      size: "small",
-    },
-    {
-      title: "Exterior Structural Renovation",
-      location: "Calgary, AB",
-      year: "2022",
-      scope: ["Structural Renovation", "Stairs & Railings"],
-      description:
-        "A dated home reworked from the structure out. We reframed openings, built a new interior stair, and reinforced the supports so the floor plan could open up. The bones came first, and the finishes that make it feel new came after.",
-      image: {
-        src: "/images/project-renovation-exterior.jpg",
-        alt: "Carpenters reworking the exterior structure of a home",
-      },
-      gallery: [
-        { src: "/images/project-renovation-exterior.jpg", alt: "Reworking the structure of an existing home" },
-        { src: "/images/interior-staircase.jpg", alt: "New open-rise staircase after the renovation" },
-        { src: "/images/interior-open-living.jpg", alt: "Reconfigured open living area" },
-      ],
-      size: "small",
-    },
-    {
-      title: "Main-Floor Structural Reno",
-      location: "Calgary, AB",
-      year: "2022",
-      scope: ["Load-Bearing Wall Removal", "Beam Installation", "Kitchen"],
-      description:
-        "Two small rooms became one bright kitchen and dining space. We took out the wall between them, set a beam to carry the load, and reframed for the new kitchen layout. It's a straightforward structural reno that completely changes how the floor lives.",
-      image: {
-        src: "/images/project-renovation-kitchen.jpg",
-        alt: "Finished main-floor renovation after structural work",
-      },
-      gallery: [
-        { src: "/images/project-renovation-kitchen.jpg", alt: "Finished main-floor renovation" },
-        { src: "/images/kitchen-detail.jpg", alt: "New kitchen detail after the structural work" },
-        { src: "/images/interior-feature-wall.jpg", alt: "Open kitchen and living area after the reno" },
+        { src: "/images/work/excavation-auger.jpg", alt: "Case skid steer drilling post holes with an auger" },
+        { src: "/images/work/excavation-trailer.jpg", alt: "Truck and skid steer loaded on a trailer at a job site" },
+        { src: "/images/work/site-acreage.jpg", alt: "Alberta acreage site ready for prep work" },
       ],
       size: "small",
     },
