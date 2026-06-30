@@ -1,23 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Icon } from "./Icon";
-import { BrandMark } from "./BrandMark";
 import { nav, business } from "@/lib/content";
 
-/** Outlined twin-peak mark + TRAIL / CONSTRUCTION LTD. wordmark. */
+/** Full logo mark — SVG filtered to display gold on dark nav backgrounds. */
 function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-3" aria-label={`${business.name} home`}>
-      <BrandMark className="h-9 w-auto text-white" />
-      <span className="flex flex-col leading-none">
-        <span className="text-xl font-extrabold tracking-tight text-white">
-          TRAIL
-        </span>
-        <span className="mt-1 text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-cream-soft">
-          Construction Ltd.
-        </span>
-      </span>
+    <a href="#top" className="flex items-center" aria-label={`${business.name} home`}>
+      <Image
+        src="/images/Gold Minimalist Adventure Mountain Logo.svg"
+        alt="Trail Construction Ltd."
+        width={220}
+        height={66}
+        className="h-14 w-auto"
+        style={{ filter: "brightness(0) saturate(100%) invert(80%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(95%)" }}
+        priority
+      />
     </a>
   );
 }
