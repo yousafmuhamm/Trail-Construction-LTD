@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Icon } from "./Icon";
 import { nav, business } from "@/lib/content";
 
-/** Full logo mark — SVG filtered to display gold on dark nav backgrounds. */
+/** Full logo mark — SVG filtered to display white on dark nav backgrounds. */
 function Logo() {
   return (
     <a href="#top" className="flex items-center" aria-label={`${business.name} home`}>
@@ -14,8 +14,8 @@ function Logo() {
         alt="Trail Construction Ltd."
         width={220}
         height={66}
-        className="h-14 w-auto"
-        style={{ filter: "brightness(0) saturate(100%) invert(80%) sepia(40%) saturate(500%) hue-rotate(5deg) brightness(95%)" }}
+        className="h-16 w-auto"
+        style={{ filter: "brightness(0) invert(1)" }}
         priority
       />
     </a>

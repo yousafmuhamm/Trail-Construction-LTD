@@ -20,8 +20,10 @@ function ProjectTile({
       type="button"
       onClick={onOpen}
       aria-label={`View details for ${project.title}`}
-      className={`group relative block overflow-hidden rounded-xl bg-charcoal text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
-        featured ? "lg:col-span-1 lg:row-span-2" : ""
+      className={`group relative block aspect-[4/3] overflow-hidden rounded-xl bg-charcoal text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 focus-visible:ring-offset-white lg:aspect-auto ${
+        featured
+          ? "col-span-2 aspect-[16/10] lg:col-span-1 lg:row-span-2 lg:aspect-auto"
+          : ""
       }`}
     >
       <Image
@@ -79,7 +81,7 @@ export function ProjectGallery({ items }: { items: Project[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-3 lg:auto-rows-[17rem]">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:auto-rows-[17rem]">
         {featured && (
           <ProjectTile project={featured} featured onOpen={() => open(featured)} />
         )}
