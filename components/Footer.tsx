@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { Icon } from "./Icon";
-import { BrandMark } from "./BrandMark";
 import { business, nav } from "@/lib/content";
 
 export function Footer() {
@@ -11,12 +11,14 @@ export function Footer() {
         <div className="flex flex-col gap-8 border-b border-forest-700/60 pb-8 md:flex-row md:items-start md:justify-between">
           {/* Brand */}
           <div className="max-w-sm">
-            <div className="flex items-center gap-2.5">
-              <BrandMark className="h-8 w-auto text-cream" />
-              <span className="text-base font-extrabold tracking-tight text-cream">
-                {business.name}
-              </span>
-            </div>
+            <Image
+              src="/images/Gold Minimalist Adventure Mountain Logo.svg"
+              alt={business.name}
+              width={220}
+              height={66}
+              className="h-14 w-auto"
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
             <p className="mt-4 text-sm leading-relaxed text-cream-soft">
               Structural carpentry done right since {business.foundedYear}. Beams, load-bearing
               walls, framing and additions across {business.serviceArea}.

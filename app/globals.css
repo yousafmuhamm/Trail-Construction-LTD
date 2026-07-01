@@ -31,10 +31,10 @@
   --color-cream-soft: #bbc4ba; /* muted text on dark */
 
   /* Type families (wired to next/font variables in layout.tsx) */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   /* NOTE: do not name this --font-display; that collides with the CSS
      `font-display` descriptor in Tailwind v4 and the utility won't generate. */
-  --font-heading: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {

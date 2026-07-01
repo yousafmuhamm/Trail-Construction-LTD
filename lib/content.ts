@@ -27,6 +27,7 @@ export const nav = {
     { label: "Home", href: "#top" },
     { label: "Services", href: "#services" },
     { label: "Projects", href: "#projects" },
+    { label: "Reviews", href: "#reviews" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
@@ -59,6 +60,7 @@ export const about = {
   body: [
     "Trail Construction has been framing and rebuilding Alberta homes since 1988. Ken Lepp runs the company out of Calgary, and we incorporated in 2000.",
     "We stick to the structural side of the job: the beams, walls, and framing that hold everything else up. We do the carpentry properly and get the engineering right, so the work holds up for decades.",
+    "Over the years we've built for fine-home builders, commercial warehouse developers and individual homeowners alike, working alongside just about every other trade. That range is why we're comfortable fitting structural work into whatever a project needs.",
   ],
 } as const;
 
@@ -117,6 +119,8 @@ export const services = {
 
 export type Project = {
   title: string;
+  /** Broad project type shown as a label chip on the card. */
+  category: string;
   location: string;
   /** Short year/timeframe shown as a chip. */
   year: string;
@@ -129,6 +133,8 @@ export type Project = {
   gallery: { src: string; alt: string }[];
   /** "large" renders the featured tile; the rest fill the 2×2 grid. */
   size: "large" | "small";
+  /** Shown in the initial 6-card grid; the rest reveal on "view more". */
+  featured?: boolean;
 };
 
 export const projects = {
@@ -142,6 +148,8 @@ export const projects = {
   items: [
     {
       title: "Custom Home Framing",
+      category: "New Build Framing",
+      featured: true,
       location: "Central Alberta",
       year: "2021",
       scope: ["Custom Framing", "New Build", "Roof Systems"],
@@ -162,6 +170,8 @@ export const projects = {
     },
     {
       title: "Beam Installation & Wall Removal",
+      category: "Structural",
+      featured: true,
       location: "Calgary, AB",
       year: "2022",
       scope: ["Beam Installation", "Load-Bearing Wall Removal", "Steel & LVL"],
@@ -182,6 +192,8 @@ export const projects = {
     },
     {
       title: "Structural Renovation & Support Posts",
+      category: "Renovation",
+      featured: true,
       location: "Calgary, AB",
       year: "2023",
       scope: ["Structural Renovation", "Support Posts", "Footing Pads"],
@@ -202,6 +214,8 @@ export const projects = {
     },
     {
       title: "Custom Decks & Railings",
+      category: "Decks & Outdoor",
+      featured: true,
       location: "Olds, AB",
       year: "2019",
       scope: ["Decks", "Railings", "Stairs"],
@@ -222,6 +236,7 @@ export const projects = {
     },
     {
       title: "Excavation & Site Prep",
+      category: "Excavation",
       location: "Central Alberta",
       year: "2021",
       scope: ["Excavation", "Site Prep", "Skid Steer"],
@@ -240,8 +255,158 @@ export const projects = {
       ],
       size: "small",
     },
+    {
+      title: "Interior Mezzanine Build",
+      category: "Mezzanine",
+      featured: true,
+      location: "Central Alberta",
+      year: "2020",
+      scope: ["Mezzanines", "Framing", "Railings"],
+      description:
+        "We framed a new mezzanine to add usable floor space overhead, carried on properly sized beams and posts and left level and solid underfoot, finished with a clean wood railing. A mezzanine is a smart way to pull more room out of a high-ceilinged shop, garage or home without adding to the footprint.",
+      image: {
+        src: "/images/work/framing-mezzanine.jpg",
+        alt: "Framed interior mezzanine level with a wood railing",
+      },
+      gallery: [
+        { src: "/images/work/framing-mezzanine.jpg", alt: "Framed mezzanine level with a wood railing" },
+        { src: "/images/work/framing-custom.jpg", alt: "Custom framing with the mezzanine framed into the build" },
+        { src: "/images/work/framing-arch.jpg", alt: "Interior framing detail with curved roof structure above" },
+        { src: "/images/work/beam-open.jpg", alt: "Open floor below the mezzanine carried on a dropped beam" },
+        { src: "/images/work/reno-posts.jpg", alt: "Steel support posts carrying the mezzanine load" },
+      ],
+      size: "small",
+    },
+    {
+      title: "Two-Storey Addition",
+      category: "Addition",
+      featured: true,
+      location: "Airdrie, AB",
+      year: "2024",
+      scope: ["Additions", "Framing", "Roof Systems"],
+      description:
+        "We framed a full two-storey addition and tied it into the existing home, matching the rooflines and carrying the new loads properly so the addition reads as part of the original house. Additions mean working around what is already there, so we coordinate closely with the other trades to keep everything tight.",
+      image: {
+        src: "/images/work/framing-arch.jpg",
+        alt: "Framed two-storey addition with a curved roof structure",
+      },
+      gallery: [
+        { src: "/images/work/framing-arch.jpg", alt: "Framed addition with a barrel-vault roof structure" },
+        { src: "/images/work/framing-custom.jpg", alt: "New addition framing tied into the existing home" },
+        { src: "/images/work/framing-mezzanine.jpg", alt: "Second-storey framing with a wood railing" },
+        { src: "/images/work/beam-open.jpg", alt: "Open main floor below the addition carried on a beam" },
+        { src: "/images/work/reno-home.jpg", alt: "Home exterior partway through the addition build" },
+      ],
+      size: "small",
+    },
+    {
+      title: "Flush Steel Beam Installation",
+      category: "Steel Beams",
+      location: "Calgary, AB",
+      year: "2023",
+      scope: ["Steel Beams", "Beam Installation", "Load Transfer"],
+      description:
+        "We set flush steel beams up into the floor joists so the ceiling line stays clean, with no posts or dropped bulkheads in the way. Each beam is sized to the load it carries and installed to the engineer's specs, then the framing is tied back into it solid.",
+      image: {
+        src: "/images/work/beam-steel.jpg",
+        alt: "Flush black steel beam set up into the floor joists",
+      },
+      gallery: [
+        { src: "/images/work/beam-steel.jpg", alt: "Flush steel beam installed up into the joists" },
+        { src: "/images/work/beam-joist.jpg", alt: "Steel beam carrying the floor joists on a support post" },
+        { src: "/images/work/beam-open.jpg", alt: "Open main floor after the flush beam went in" },
+        { src: "/images/work/reno-posts.jpg", alt: "Steel support posts carrying the new beam" },
+        { src: "/images/work/framing-mezzanine.jpg", alt: "Framing tied back into the new steel beam" },
+      ],
+      size: "small",
+    },
+    {
+      title: "New Concrete Footing Pads",
+      category: "Foundations",
+      location: "Olds, AB",
+      year: "2022",
+      scope: ["Footing Pads", "Concrete", "Support Posts"],
+      description:
+        "New concrete footing pads poured under support posts to carry added structural loads. We handle the forming, the rebar and the pour so the posts and beams above land on a solid base, then set the steel posts once the concrete has cured.",
+      image: {
+        src: "/images/work/reno-footing.jpg",
+        alt: "Rebar in a new concrete footing pad before the pour",
+      },
+      gallery: [
+        { src: "/images/work/reno-footing.jpg", alt: "Rebar cage in a formed concrete footing pad" },
+        { src: "/images/work/reno-posts.jpg", alt: "New steel support posts set on the footing pads" },
+        { src: "/images/work/beam-joist.jpg", alt: "Beam and post carrying the floor above the footings" },
+        { src: "/images/work/beam-steel.jpg", alt: "Steel beam supported off the new footing pads" },
+        { src: "/images/work/reno-home.jpg", alt: "Home where the new footings were poured" },
+      ],
+      size: "small",
+    },
+    {
+      title: "Acreage Deck & Yard",
+      category: "Decks & Outdoor",
+      location: "Cochrane, AB",
+      year: "2018",
+      scope: ["Decks", "Railings", "Site Prep"],
+      description:
+        "A cedar deck built for an acreage, with the framing, decking and railing done to suit the view and how the family uses the yard. We drilled the footings and set the posts ourselves, so the whole build stayed on our own schedule from the dirt work up.",
+      image: {
+        src: "/images/work/deck-lounge.jpg",
+        alt: "Finished cedar deck with patio furniture and a treeline view",
+      },
+      gallery: [
+        { src: "/images/work/deck-lounge.jpg", alt: "Cedar entertaining deck with patio furniture" },
+        { src: "/images/work/deck-cedar.jpg", alt: "Cedar deck with a metal-spindle railing and rural view" },
+        { src: "/images/work/excavation-auger.jpg", alt: "Skid steer drilling the deck footings with an auger" },
+        { src: "/images/work/site-acreage.jpg", alt: "Acreage property where the deck was built" },
+        { src: "/images/work/excavation-trailer.jpg", alt: "Skid steer arriving on the trailer for the deck footings" },
+      ],
+      size: "small",
+    },
   ] satisfies Project[],
 };
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  /** Short attribution line, e.g. "Homeowner · Calgary". */
+  role: string;
+  /** Star rating out of 5. */
+  rating: number;
+};
+
+/**
+ * SAMPLE reviews — placeholder copy written to show the section design.
+ * Replace with real client testimonials (with permission) before launch.
+ */
+export const testimonials = {
+  label: "Client Reviews",
+  heading: "Work that earns repeat business.",
+  intro:
+    "Homeowners and builders across Central Alberta trust us with the structural side of their projects. Here's what a few of them have said.",
+  items: [
+    {
+      quote:
+        "Trail took out a load-bearing wall and set a steel beam so our kitchen and living room finally read as one space. Ken knew exactly what the structure needed, worked cleanly, and left everything square for the rest of our reno.",
+      name: "Dave M.",
+      role: "Homeowner · Calgary",
+      rating: 5,
+    },
+    {
+      quote:
+        "We've had Trail frame several of our custom homes. The work comes back square and true, on schedule, and they coordinate well with the other trades. That reliability is why we keep calling them back.",
+      name: "Custom Home Builder",
+      role: "Building Partner · Central Alberta",
+      rating: 5,
+    },
+    {
+      quote:
+        "Honest quote, no surprises, and the mezzanine and support posts they put in are rock solid. Thirty-plus years of experience really shows in how they approach the structural side of a job.",
+      name: "Sarah T.",
+      role: "Homeowner · Olds",
+      rating: 5,
+    },
+  ] satisfies Testimonial[],
+} as const;
 
 export type Step = {
   number: string;

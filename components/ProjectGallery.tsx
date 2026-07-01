@@ -6,13 +6,11 @@ import { Icon } from "./Icon";
 import { ProjectModal } from "./ProjectModal";
 import { type Project } from "@/lib/content";
 
-function ProjectTile({
+function ProjectCard({
   project,
-  featured,
   onOpen,
 }: {
   project: Project;
-  featured?: boolean;
   onOpen: () => void;
 }) {
   return (
@@ -20,53 +18,69 @@ function ProjectTile({
       type="button"
       onClick={onOpen}
       aria-label={`View details for ${project.title}`}
-      className={`group relative block aspect-[4/3] overflow-hidden rounded-xl bg-charcoal text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass focus-visible:ring-offset-2 focus-visible:ring-offset-white lg:aspect-auto ${
-        featured
-          ? "col-span-2 aspect-[16/10] lg:col-span-1 lg:row-span-2 lg:aspect-auto"
-          : ""
-      }`}
+      className="group flex flex-col overflow-hidden rounded-xl border border-line bg-white text-left shadow-sm transition-shadow duration-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white"
     >
-      <Image
-        src={project.image.src}
-        alt={project.image.alt}
-        fill
-        sizes={featured ? "(max-width: 1024px) 100vw, 25vw" : "(max-width: 1024px) 100vw, 17vw"}
-        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/10 to-transparent transition-opacity group-hover:from-charcoal"
-      />
+      {/* Photo with category + year chips */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-charcoal">
+        <Image
+          src={project.image.src}
+          alt={project.image.alt}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        />
 
-      {/* "View" affordance on hover */}
-      <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
-        View project
-        <Icon name="arrowRight" className="h-3.5 w-3.5" />
-      </span>
+        {/* Category label — top-left */}
+        <span className="absolute left-3 top-3 rounded-md bg-charcoal/85 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-cream backdrop-blur">
+          {project.category}
+        </span>
 
-      <span className="absolute inset-x-0 bottom-0 block p-4">
-        <span
-          className={`block font-heading font-bold text-white ${
-            featured ? "text-lg sm:text-xl" : "text-sm"
-          }`}
-        >
+        {/* Year chip — bottom-right */}
+        <span className="absolute bottom-3 right-3 rounded-md bg-brass px-3 py-1.5 text-xs font-bold text-charcoal">
+          {project.year}
+        </span>
+      </div>
+
+      {/* Details */}
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <h3 className="font-heading text-xl font-bold leading-snug text-ink">
           {project.title}
-        </span>
-        <span className="mt-1 flex items-center gap-1.5 text-xs text-cream-soft">
-          <Icon name="pin" className="h-3.5 w-3.5 text-brass-soft" />
+        </h3>
+
+        <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-soft">
+          <Icon name="pin" className="h-4 w-4 shrink-0 text-brass" />
           {project.location}
+          <span aria-hidden className="text-line">·</span>
+          {project.scope[0]}
+        </p>
+
+        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft">
+          {project.description}
+        </p>
+
+        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
+          View project
+          <Icon
+            name="arrowRight"
+            className="h-4 w-4 transition-transform group-hover:translate-x-1"
+          />
         </span>
-      </span>
+      </div>
     </button>
   );
 }
 
 export function ProjectGallery({ items }: { items: Project[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState(false);
   const lastFocused = useRef<HTMLElement | null>(null);
 
-  const featured = items.find((p) => p.size === "large");
-  const rest = items.filter((p) => p.size === "small");
+  // Show the flagged flagship projects first; the rest reveal on "view more".
+  // If nothing is flagged, fall back to showing everything.
+  const primary = items.filter((p) => p.featured);
+  const extra = primary.length ? items.filter((p) => !p.featured) : [];
+  const shown = primary.length ? primary : items;
+  const visible = expanded ? [...shown, ...extra] : shown;
 
   function open(project: Project) {
     lastFocused.current = document.activeElement as HTMLElement;
@@ -75,20 +89,38 @@ export function ProjectGallery({ items }: { items: Project[] }) {
 
   function close() {
     setOpenIndex(null);
-    // Restore focus to the tile that opened the modal.
+    // Restore focus to the card that opened the modal.
     requestAnimationFrame(() => lastFocused.current?.focus());
   }
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:auto-rows-[17rem]">
-        {featured && (
-          <ProjectTile project={featured} featured onOpen={() => open(featured)} />
-        )}
-        {rest.map((project) => (
-          <ProjectTile key={project.title} project={project} onOpen={() => open(project)} />
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {visible.map((project) => (
+          <ProjectCard
+            key={project.title}
+            project={project}
+            onOpen={() => open(project)}
+          />
         ))}
       </div>
+
+      {extra.length > 0 && (
+        <div className="mt-10 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            aria-expanded={expanded}
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-sm font-semibold text-ink shadow-sm transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          >
+            {expanded ? "Show fewer projects" : `View ${extra.length} more projects`}
+            <Icon
+              name="chevronDown"
+              className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+            />
+          </button>
+        </div>
+      )}
 
       {openIndex !== null && (
         <ProjectModal project={items[openIndex]} onClose={close} />

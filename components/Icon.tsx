@@ -22,6 +22,7 @@ export type IconName =
   | "deliver"
   // stats
   | "award"
+  | "star"
   | "calendar"
   | "home"
   | "building"
@@ -126,6 +127,10 @@ const paths: Record<IconName, React.ReactNode> = {
       <circle cx="12" cy="9" r="5" />
       <path d="M9 13.5 8 21l4-2 4 2-1-7.5" />
     </>
+  ),
+  // Five-point star — rendered filled for review ratings
+  star: (
+    <path d="M12 3.5l2.6 5.27 5.82.85-4.21 4.1.99 5.78L12 16.77l-5.2 2.73.99-5.78-4.21-4.1 5.82-.85z" />
   ),
   calendar: (
     <>

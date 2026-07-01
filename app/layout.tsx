@@ -1,22 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { DM_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { business } from "@/lib/content";
 
-// Body copy — clean, highly legible workhorse sans.
-const inter = Inter({
-  variable: "--font-inter",
+// Body copy — DM Sans: a clean, geometric-humanist workhorse. Modern and
+// legible with a hint of warmth that keeps the tone approachable.
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-// Display / headlines — Fraunces: an old-style serif revival. Heritage and
-// premium, with heavy display weights that still feel sturdy and grounded.
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Display / headlines — Space Grotesk: a modern geometric grotesque. Its
+// architectural, engineered letterforms echo the angular mountain logo and
+// give the headings a confident, structural presence.
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -57,7 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <head>
         {/* No-JS / non-JS-crawler fallback: scroll-reveal elements stay visible. */}

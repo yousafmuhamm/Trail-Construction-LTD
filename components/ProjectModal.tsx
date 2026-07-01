@@ -74,22 +74,11 @@ export function ProjectModal({
         tabIndex={-1}
         className="relative z-10 flex h-[90svh] w-[92vw] max-w-[1480px] flex-col overflow-y-auto rounded-2xl shadow-2xl outline-none lg:h-[81svh] lg:w-[82vw] lg:flex-row lg:overflow-hidden"
       >
-        {/* ── Info side (dark) ───────────────────────────── */}
-        <div className="relative flex shrink-0 flex-col bg-forest p-7 text-cream sm:p-10 lg:w-[42%] lg:overflow-y-auto">
-          {/* Mobile close — the gallery-side close sits below the fold on
-              phones, so give the info panel its own always-visible control. */}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close project details"
-            className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-cream backdrop-blur transition-colors hover:bg-white/20 lg:hidden"
-          >
-            <Icon name="close" className="h-5 w-5" />
-          </button>
-
+        {/* ── Info side (dark) — below the gallery on mobile, left on desktop ── */}
+        <div className="relative order-2 flex shrink-0 flex-col bg-forest p-7 text-cream sm:p-10 lg:order-1 lg:w-[42%] lg:overflow-y-auto">
           <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-brass-soft">
             <span aria-hidden className="h-px w-8 bg-brass-soft/60" />
-            Featured Project
+            {project.category}
           </p>
 
           <h2
@@ -150,14 +139,14 @@ export function ProjectModal({
           </div>
         </div>
 
-        {/* ── Gallery side (light) ───────────────────────── */}
-        <div className="relative flex min-h-[50svh] flex-1 flex-col bg-paper">
-          {/* Close — desktop only; mobile uses the info-panel close above. */}
+        {/* ── Gallery side (light) — on top on mobile, right on desktop ── */}
+        <div className="relative order-1 flex min-h-[50svh] flex-1 flex-col bg-paper lg:order-2">
+          {/* Close — sits at the top-right of the images on every screen size. */}
           <button
             type="button"
             onClick={onClose}
             aria-label="Close project details"
-            className="absolute right-4 top-4 z-20 hidden h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-lg ring-1 ring-black/5 transition-colors hover:bg-paper-dim lg:grid"
+            className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-lg ring-1 ring-black/5 transition-colors hover:bg-paper-dim"
           >
             <Icon name="close" className="h-5 w-5" />
           </button>
