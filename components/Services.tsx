@@ -1,29 +1,129 @@
+"use client";
+
+import { useRef, useState } from "react";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
 import { SectionLabel } from "./SectionLabel";
-import { services } from "@/lib/content";
+import { PhotoStack } from "./PhotoStack";
+import { GalleryModal } from "./GalleryModal";
+import { services, servicesContent, type ServiceShowcase } from "@/lib/content";
+
+function PhotoButton({
+  onClick,
+  inverse = false,
+}: {
+  onClick: () => void;
+  inverse?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold transition-colors sm:w-auto ${
+        inverse
+          ? "bg-white text-forest hover:bg-paper"
+          : "bg-brand text-white hover:bg-brand-hover"
+      }`}
+    >
+      See the work
+      <Icon name="arrowRight" className="h-4 w-4" />
+    </button>
+  );
+}
+
+function MainServiceCard({
+  service,
+  onOpen,
+}: {
+  service: ServiceShowcase;
+  onOpen: () => void;
+}) {
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white shadow-sm">
+      <PhotoStack photos={service.photos} title={service.title} />
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <span className="text-brand">
+          <Icon name={service.icon} className="h-7 w-7" />
+        </span>
+        <h3 className="mt-4 font-heading text-2xl font-bold leading-tight text-ink">
+          {service.title}
+        </h3>
+        <p className="mt-3 text-sm leading-relaxed text-ink-soft">{service.tagline}</p>
+        <div className="mt-6 sm:mt-auto sm:pt-6">
+          <PhotoButton onClick={onOpen} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function SecondaryServiceCard({
+  service,
+  onOpen,
+}: {
+  service: ServiceShowcase;
+  onOpen: () => void;
+}) {
+  return (
+    <article className="grid overflow-hidden rounded-lg border border-line bg-paper sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <PhotoStack photos={service.photos} title={service.title} size="compact" />
+      <div className="flex flex-col justify-center p-5 sm:p-6">
+        <span className="text-brand">
+          <Icon name={service.icon} className="h-6 w-6" />
+        </span>
+        <h4 className="mt-3 font-heading text-xl font-bold leading-tight text-ink">
+          {service.title}
+        </h4>
+        <p className="mt-2 text-sm leading-relaxed text-ink-soft">{service.tagline}</p>
+        <button
+          type="button"
+          onClick={onOpen}
+          className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-brand-hover sm:w-fit sm:justify-start"
+        >
+          See the work
+          <Icon name="arrowRight" className="h-4 w-4" />
+        </button>
+      </div>
+    </article>
+  );
+}
 
 export function Services() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const lastFocused = useRef<HTMLElement | null>(null);
+  const flagship = services.find((service) => service.tier === "flagship");
+  const main = services.filter((service) => service.tier === "main");
+  const secondary = services.filter((service) => service.tier === "secondary");
+
+  function open(serviceIndex: number) {
+    lastFocused.current = document.activeElement as HTMLElement;
+    setOpenIndex(serviceIndex);
+  }
+
+  function close() {
+    setOpenIndex(null);
+    requestAnimationFrame(() => lastFocused.current?.focus());
+  }
+
   return (
     <section id="services" className="bg-paper py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        {/* Section header */}
-        <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <Reveal>
-            <SectionLabel>{services.label}</SectionLabel>
-            <h2 className="mt-4 max-w-xl font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
-              {services.heading}
+            <SectionLabel>{servicesContent.label}</SectionLabel>
+            <h2 className="mt-4 max-w-3xl font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+              {servicesContent.heading}
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-              {services.intro}
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">
+              {servicesContent.intro}
             </p>
           </Reveal>
           <Reveal delay={100}>
             <a
-              href={services.link.href}
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-brand-hover"
+              href={servicesContent.link.href}
+              className="group inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-brand-hover"
             >
-              {services.link.label}
+              {servicesContent.link.label}
               <Icon
                 name="arrowRight"
                 className="h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -32,25 +132,75 @@ export function Services() {
           </Reveal>
         </div>
 
-        {/* Service grid */}
-        <ul className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-          {services.items.map((service, i) => (
-            <Reveal as="li" key={service.title} delay={(i % 3) * 80}>
-              <div className="group flex h-full flex-col bg-paper p-7 transition-colors hover:bg-white">
-                <span className="block text-brand">
-                  <Icon name={service.icon} className="h-8 w-8" />
-                </span>
-                <h3 className="mt-4 font-heading text-lg font-bold text-ink">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                  {service.description}
+        {flagship && (
+          <Reveal className="mt-12">
+            <article className="grid overflow-hidden rounded-lg bg-forest shadow-lg lg:grid-cols-[minmax(0,1.25fr)_minmax(22rem,0.75fr)]">
+              <PhotoStack
+                photos={flagship.photos}
+                title={flagship.title}
+                size="flagship"
+              />
+              <div className="flex flex-col justify-center p-7 text-cream sm:p-10 lg:p-12">
+                <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-brass-soft">
+                  <Icon name={flagship.icon} className="h-5 w-5" />
+                  Most requested
                 </p>
+                <h3 className="mt-5 font-heading text-3xl font-bold leading-[1.08] text-white sm:text-4xl">
+                  {flagship.title}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-cream-soft">
+                  {flagship.tagline}
+                </p>
+                <div className="mt-7">
+                  <PhotoButton
+                    onClick={() => open(services.indexOf(flagship))}
+                    inverse
+                  />
+                </div>
               </div>
+            </article>
+          </Reveal>
+        )}
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          {main.map((service, index) => (
+            <Reveal key={service.slug} delay={index * 90}>
+              <MainServiceCard
+                service={service}
+                onOpen={() => open(services.indexOf(service))}
+              />
             </Reveal>
           ))}
-        </ul>
+        </div>
+
+        <Reveal className="mt-14 border-t border-line pt-10">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 className="font-heading text-2xl font-bold text-ink">We also do</h3>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft">
+                We have the equipment and experience to handle these when they fit the job.
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+            {secondary.map((service) => (
+              <SecondaryServiceCard
+                key={service.slug}
+                service={service}
+                onOpen={() => open(services.indexOf(service))}
+              />
+            ))}
+          </div>
+        </Reveal>
       </div>
+
+      {openIndex !== null && (
+        <GalleryModal
+          service={services[openIndex]}
+          initialPhoto={0}
+          onClose={close}
+        />
+      )}
     </section>
   );
 }

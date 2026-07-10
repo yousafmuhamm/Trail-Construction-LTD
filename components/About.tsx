@@ -1,42 +1,48 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
 import { SectionLabel } from "./SectionLabel";
 import { about, business } from "@/lib/content";
 
 export function About() {
   return (
-    <section id="about" className="bg-white py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Image — PLACEHOLDER, see public/images/README.md */}
-          <Reveal className="order-last lg:order-first">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-charcoal">
-              <Image
-                src="/images/crew-site.jpg"
-                alt="Construction crew on a job site"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
+    <section className="bg-white py-16 sm:py-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 sm:px-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
+        <Reveal>
+          <div className="relative aspect-[16/11] overflow-hidden rounded-lg bg-charcoal md:aspect-[4/3]">
+            <Image
+              src="/images/crew-site.jpg"
+              alt="Trail Construction crew working on a job site"
+              fill
+              sizes="(max-width: 768px) 100vw, 42vw"
+              className="object-cover"
+            />
+          </div>
+        </Reveal>
 
-          <Reveal delay={100}>
-            <SectionLabel>{about.label}</SectionLabel>
-            <h2 className="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[2.5rem] lg:leading-[1.12]">
-              {about.heading}
-            </h2>
-            {about.body.map((para) => (
-              <p key={para} className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft">
-                {para}
-              </p>
-            ))}
-            <p className="mt-6 text-sm font-medium text-ink">
-              Owner-operated by {business.owner} · Incorporated in Alberta since{" "}
-              {business.incorporatedYear}
-            </p>
-          </Reveal>
-        </div>
+        <Reveal delay={100}>
+          <SectionLabel>{about.label}</SectionLabel>
+          <h2 className="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[2.5rem] lg:leading-[1.12]">
+            {about.heading}
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">
+            Trail Construction has worked without interruption across south central Alberta since {business.foundedYear}. Today, Ken&apos;s work is centred on bearing-wall removals, beam installations and the structural carpentry around them.
+          </p>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
+            Decades alongside builders, homeowners and other trades have taught us how to plan the work carefully and leave a solid result for whoever follows.
+          </p>
+          <Link
+            href="/about"
+            className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm border border-line px-5 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand hover:text-brand-hover sm:w-auto"
+          >
+            More about us
+            <Icon
+              name="arrowRight"
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+            />
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

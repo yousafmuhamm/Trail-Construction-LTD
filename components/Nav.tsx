@@ -2,23 +2,23 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Icon } from "./Icon";
 import { nav, business } from "@/lib/content";
 
-/** Full logo mark — SVG filtered to display white on dark nav backgrounds. */
 function Logo() {
   return (
-    <a href="#top" className="flex items-center" aria-label={`${business.name} home`}>
+    <Link href="/" className="flex shrink-0 items-center" aria-label={`${business.name} home`}>
       <Image
         src="/images/Gold Minimalist Adventure Mountain Logo.svg"
         alt="Trail Construction Ltd."
         width={220}
         height={66}
-        className="h-16 w-auto"
+        className="h-12 w-auto sm:h-14"
         style={{ filter: "brightness(0) invert(1)" }}
         priority
       />
-    </a>
+    </Link>
   );
 }
 
@@ -33,11 +33,11 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll while the mobile menu is open.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    const previousOverflow = document.body.style.overflow;
+    if (open) document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [open]);
 
@@ -45,80 +45,100 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         scrolled || open
-          ? "border-b border-forest-700/60 bg-charcoal/95 backdrop-blur supports-[backdrop-filter]:bg-charcoal/80"
+          ? "border-b border-forest-700/60 bg-charcoal/95 backdrop-blur supports-[backdrop-filter]:bg-charcoal/85"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav
         aria-label="Primary"
-        className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"
+        className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-8"
       >
         <Logo />
 
-        {/* Desktop links — centered */}
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 lg:flex">
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex xl:gap-8">
           {nav.links.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
-                className="text-[0.95rem] font-medium text-cream transition-colors hover:text-brand-soft"
+                className="inline-flex min-h-11 items-center text-[0.95rem] font-medium text-cream transition-colors hover:text-brand-soft"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-2 lg:flex">
           <a
+            href={business.phoneHref}
+            className="inline-flex min-h-12 items-center gap-2 rounded-sm border border-white/25 px-4 py-3 text-sm font-semibold text-cream transition-colors hover:border-white/50 hover:bg-white/10"
+          >
+            <Icon name="phone" className="h-4 w-4 text-brass-soft" />
+            {business.phone}
+          </a>
+          <Link
             href={nav.cta.href}
-            className="inline-flex items-center gap-2.5 rounded-sm bg-forest px-6 py-3.5 text-sm font-semibold text-white ring-1 ring-inset ring-white/10 transition-colors hover:bg-brand"
+            className="inline-flex min-h-12 items-center gap-2 rounded-sm bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-hover xl:px-6"
           >
             {nav.cta.label}
             <Icon name="arrowRight" className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-cream lg:hidden"
-        >
-          <Icon name={open ? "close" : "menu"} className="h-6 w-6" />
-        </button>
+        <div className="flex items-center gap-1.5 lg:hidden">
+          <a
+            href={business.phoneHref}
+            aria-label={`Call ${business.phone}`}
+            className="grid h-11 w-11 place-items-center rounded-md text-cream transition-colors hover:bg-white/10"
+          >
+            <Icon name="phone" className="h-5 w-5" />
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-md text-cream transition-colors hover:bg-white/10"
+          >
+            <Icon name={open ? "close" : "menu"} className="h-6 w-6" />
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile menu */}
       <div
         id="mobile-menu"
         hidden={!open}
-        className="border-t border-forest-700/60 bg-charcoal lg:hidden"
+        className="h-[calc(100svh-5rem)] overflow-y-auto border-t border-forest-700/60 bg-charcoal lg:hidden"
       >
-        <ul className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-4 sm:px-8">
+        <ul className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-8">
           {nav.links.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block rounded-md px-3 py-3 text-base font-medium text-cream-soft transition-colors hover:bg-forest-700/40 hover:text-cream"
+                className="flex min-h-12 items-center rounded-md px-3 py-3 text-base font-medium text-cream-soft transition-colors hover:bg-forest-700/40 hover:text-cream"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
-          <li className="mt-2">
+          <li className="mt-3 grid gap-3 sm:grid-cols-2">
             <a
+              href={business.phoneHref}
+              className="flex min-h-12 items-center justify-center gap-2 rounded-md border border-white/20 px-5 py-3 text-base font-semibold text-cream transition-colors hover:bg-white/10"
+            >
+              <Icon name="phone" className="h-5 w-5 text-brass-soft" />
+              {business.phone}
+            </a>
+            <Link
               href={nav.cta.href}
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-md bg-brand px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-brand-hover"
+              className="flex min-h-12 items-center justify-center gap-2 rounded-md bg-brand px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-brand-hover"
             >
               {nav.cta.label}
               <Icon name="arrowRight" className="h-4 w-4" />
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

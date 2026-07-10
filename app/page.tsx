@@ -1,8 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
-import { Projects } from "@/components/Projects";
-import { Reviews } from "@/components/Reviews";
 import { About } from "@/components/About";
 import { Process } from "@/components/Process";
 import { Contact } from "@/components/Contact";
@@ -26,7 +24,7 @@ const jsonLd = {
     addressCountry: "CA",
   },
   description:
-    "Structural carpentry contractor specializing in beam installations, load-bearing wall removal, custom framing, additions and excavation.",
+    "Structural contractor specializing in load-bearing wall removals with steel, LVL and C-channel beam installations, plus structural renovations, framing, decks and site work. In business in south central Alberta since 1988.",
 };
 
 export default function Home() {
@@ -38,7 +36,7 @@ export default function Home() {
       />
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[110] focus-visible:rounded-md focus-visible:bg-brand focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-semibold focus-visible:text-white"
       >
         Skip to content
       </a>
@@ -46,8 +44,6 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Services />
-        <Projects />
-        <Reviews />
         <About />
         <Process />
         <Contact />

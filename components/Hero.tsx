@@ -27,7 +27,7 @@ export function Hero() {
       />
 
       <div className="relative mx-auto w-full max-w-7xl px-5 pt-24 pb-20 sm:px-8 sm:pt-28 sm:pb-24">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <Reveal>
             <h1 className="font-heading text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.01em] text-white sm:text-6xl lg:text-7xl xl:text-[5rem]">
               {hero.headline.map((line) => (
@@ -39,7 +39,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-cream-soft sm:text-lg">
+            <p className="mt-7 max-w-2xl text-base leading-relaxed text-cream-soft sm:text-lg">
               {hero.subhead}
             </p>
           </Reveal>

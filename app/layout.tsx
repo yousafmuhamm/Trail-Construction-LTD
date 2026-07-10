@@ -23,23 +23,23 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://trailconstructionltd.com"),
   title: {
-    default: `${business.name}: Structural Carpentry in Calgary & Central Alberta`,
+    default: `${business.name}: Steel Beam Installations & Structural Carpentry in Calgary`,
     template: `%s | ${business.name}`,
   },
   description:
-    "Structural carpentry contractor serving Calgary, Olds and Central Alberta since 1988. Beam installations, load-bearing wall removal, custom framing, additions, decks and excavation.",
+    "Steel beam installations and load-bearing wall removals in Calgary, Olds and south central Alberta since 1988. Plus framing, structural renovations, decks and excavation.",
   keywords: [
-    "structural carpentry Calgary",
+    "steel beam installation Calgary",
     "load-bearing wall removal",
-    "beam installation",
     "LVL beam",
-    "custom framing",
-    "additions Olds Alberta",
+    "structural renovation Calgary",
+    "support posts footing pads",
+    "structural carpentry Olds Alberta",
   ],
   openGraph: {
-    title: `${business.name}: Structural Carpentry in Calgary & Central Alberta`,
+    title: `${business.name}: Steel Beam Installations & Structural Carpentry`,
     description:
-      "Beam installations, load-bearing wall removal, custom framing and additions. Serving Alberta since 1988.",
+      "Steel beam installations, load-bearing wall removals and structural carpentry. Serving south central Alberta since 1988.",
     type: "website",
     locale: "en_CA",
   },
@@ -58,6 +58,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${dmSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <head>

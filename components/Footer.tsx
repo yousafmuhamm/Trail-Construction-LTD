@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Icon } from "./Icon";
 import { business, nav } from "@/lib/content";
 
@@ -34,12 +35,12 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {nav.links.map((link) => (
                   <li key={link.href}>
-                    <a
+                    <Link
                       href={link.href}
-                      className="text-sm text-cream-soft transition-colors hover:text-cream"
+                      className="inline-flex min-h-11 items-center text-sm text-cream-soft transition-colors hover:text-cream"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -53,7 +54,7 @@ export function Footer() {
                 <li>
                   <a
                     href={business.phoneHref}
-                    className="flex items-center gap-2 text-sm text-cream-soft transition-colors hover:text-cream"
+                    className="flex min-h-11 items-center gap-2 text-sm text-cream-soft transition-colors hover:text-cream"
                   >
                     <Icon name="phone" className="h-4 w-4 text-brand-soft" />
                     {business.phone}
@@ -62,7 +63,7 @@ export function Footer() {
                 <li>
                   <a
                     href={business.emailHref}
-                    className="flex items-center gap-2 text-sm text-cream-soft transition-colors hover:text-cream"
+                    className="flex min-h-11 items-center gap-2 text-sm text-cream-soft transition-colors hover:text-cream"
                   >
                     <Icon name="mail" className="h-4 w-4 text-brand-soft" />
                     {business.email}

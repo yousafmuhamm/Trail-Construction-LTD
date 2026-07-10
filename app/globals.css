@@ -83,18 +83,14 @@
 }
 
 @layer utilities {
-  /*
-    Scroll-reveal: hidden + nudged down at rest, transitions in when JS adds
-    `.is-visible`. A <noscript> override in the layout forces these visible when
-    JS is unavailable, so the reveal is purely additive polish, never a content gate.
-  */
+  /* Content stays visible by default so hash navigation and background tabs
+     cannot leave sections blank if IntersectionObserver is delayed. */
   .reveal {
-    opacity: 0;
-    transform: translateY(24px);
+    opacity: 1;
+    transform: none;
     transition:
       opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
       transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
   }
   .reveal.is-visible {
     opacity: 1;
