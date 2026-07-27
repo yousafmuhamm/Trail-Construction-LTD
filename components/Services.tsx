@@ -10,9 +10,11 @@ import { services, servicesContent, type ServiceShowcase } from "@/lib/content";
 
 function PhotoButton({
   onClick,
+  count,
   inverse = false,
 }: {
   onClick: () => void;
+  count: number;
   inverse?: boolean;
 }) {
   return (
@@ -26,6 +28,7 @@ function PhotoButton({
       }`}
     >
       See the work
+      <span className={inverse ? "text-forest/60" : "text-white/70"}>({count} photos)</span>
       <Icon name="arrowRight" className="h-4 w-4" />
     </button>
   );
@@ -39,19 +42,21 @@ function MainServiceCard({
   onOpen: () => void;
 }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white shadow-sm">
-      <PhotoStack photos={service.photos} title={service.title} />
-      <div className="flex flex-1 flex-col p-6 sm:p-7">
+    <article className="grid overflow-hidden rounded-lg border border-line bg-white shadow-sm lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+      <div className="order-2 flex flex-col justify-center p-6 sm:p-9 lg:order-1 lg:p-11">
         <span className="text-brand">
           <Icon name={service.icon} className="h-7 w-7" />
         </span>
-        <h3 className="mt-4 font-heading text-2xl font-bold leading-tight text-ink">
+        <h3 className="mt-4 font-heading text-2xl font-bold leading-tight text-ink sm:text-3xl">
           {service.title}
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-ink-soft">{service.tagline}</p>
-        <div className="mt-6 sm:mt-auto sm:pt-6">
-          <PhotoButton onClick={onOpen} />
+        <p className="mt-3 text-base leading-relaxed text-ink-soft">{service.tagline}</p>
+        <div className="mt-7">
+          <PhotoButton onClick={onOpen} count={service.gallery.length} />
         </div>
+      </div>
+      <div className="order-1 bg-paper-dim lg:order-2">
+        <PhotoStack photos={service.photos} title={service.title} size="flagship" />
       </div>
     </article>
   );
@@ -81,6 +86,7 @@ function SecondaryServiceCard({
           className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-brand-hover sm:w-fit sm:justify-start"
         >
           See the work
+          <span className="text-ink-soft">({service.gallery.length} photos)</span>
           <Icon name="arrowRight" className="h-4 w-4" />
         </button>
       </div>
@@ -154,6 +160,7 @@ export function Services() {
                 <div className="mt-7">
                   <PhotoButton
                     onClick={() => open(services.indexOf(flagship))}
+                    count={flagship.gallery.length}
                     inverse
                   />
                 </div>
@@ -162,7 +169,7 @@ export function Services() {
           </Reveal>
         )}
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 grid gap-6">
           {main.map((service, index) => (
             <Reveal key={service.slug} delay={index * 90}>
               <MainServiceCard
@@ -195,11 +202,7 @@ export function Services() {
       </div>
 
       {openIndex !== null && (
-        <GalleryModal
-          service={services[openIndex]}
-          initialPhoto={0}
-          onClose={close}
-        />
+        <GalleryModal service={services[openIndex]} onClose={close} />
       )}
     </section>
   );

@@ -2,7 +2,7 @@
  * Trail Construction Ltd. - site content
  * --------------------------------------
  * Single, typed source of truth for site copy and image references.
- * Photos under /images/work are placeholders until Ken supplies job photos.
+ * Job photos live under /images/work. Excavation photos are still placeholders.
  */
 
 import type { IconName } from "@/components/Icon";
@@ -38,8 +38,8 @@ export const hero = {
   primaryCta: { label: "Request a Quote", href: "/#contact" },
   secondaryCta: { label: "See Our Work", href: "/#services" },
   image: {
-    src: "/images/hero-structural.jpg",
-    alt: "Steel beam and support posts carrying the floor above on a structural job",
+    src: "/images/hero-workshop-blueprints.png",
+    alt: "Three builders reviewing blueprints in a timber-framed workshop",
   },
   stats: [
     { icon: "award", top: "35+", bottom: "Years in Business", emphasize: true },
@@ -59,13 +59,18 @@ export const about = {
   ],
 } as const;
 
+export type ProjectPhoto = { src: string; alt: string };
+
 export type ServiceShowcase = {
   slug: string;
   title: string;
   tagline: string;
   icon: IconName;
   tier: "flagship" | "main" | "secondary";
-  photos: { src: string; alt: string }[];
+  /** Five-photo preview shown on the service card's PhotoStack. */
+  photos: ProjectPhoto[];
+  /** Every photo for this service — opened by "See the work". */
+  gallery: ProjectPhoto[];
   detail: {
     body: string[];
     scope: string[];
@@ -74,11 +79,102 @@ export type ServiceShowcase = {
 
 export const servicesContent = {
   label: "The Work We Do",
-  heading: "Services, with the work to back them up.",
+  heading: "What we build.",
   intro:
-    "Bearing-wall removal and beam installation are the heart of what we do now. We also take on structural renovations, framing and additions, with decks, stairs and site work where they fit.",
+    "Bearing-wall removal and beam installation are the heart of what we do now. Around that we take on framing, renovations, additions and finish carpentry, with decks, stairs and site work where they fit.",
   link: { label: "Talk to Us About Your Project", href: "/#contact" },
 } as const;
+
+const beamGallery: ProjectPhoto[] = [
+  { src: "/images/work/beam-01.jpg", alt: "Main floor opened up with a steel beam carrying the load where the bearing wall was removed" },
+  { src: "/images/work/beam-02.jpg", alt: "Steel I-beam bolted into the floor joists overhead" },
+  { src: "/images/work/beam-03.jpg", alt: "Open main floor after the bearing wall came out, carried on a new beam" },
+  { src: "/images/work/beam-04.jpg", alt: "Magnetic drill boring bolt holes through a steel beam on site" },
+  { src: "/images/work/beam-05.jpg", alt: "Steel beam and temporary support post holding the floor during a kitchen renovation" },
+  { src: "/images/work/beam-06.jpg", alt: "Exposed floor joists and beam during a bearing wall removal" },
+  { src: "/images/work/beam-07.jpg", alt: "Gutted main floor with a new steel beam spanning the opening" },
+  { src: "/images/work/beam-08.jpg", alt: "Steel beam installed across a stripped interior during renovation" },
+  { src: "/images/work/beam-09.jpg", alt: "New opening cut through a bearing wall with a beam set above" },
+  { src: "/images/work/beam-10.jpg", alt: "Exterior steel beam and bracket carrying an overhang" },
+  { src: "/images/work/beam-11.jpg", alt: "Concrete block pier built in a crawlspace to pick up a new post load" },
+  { src: "/images/work/beam-12.jpg", alt: "Engineered LVL beam strapped in place with support posts below" },
+  { src: "/images/work/beam-13.jpg", alt: "Steel beam spanning the full width of a stripped main floor" },
+  { src: "/images/work/beam-14.jpg", alt: "Temporary shoring posts holding the structure during footing work" },
+  { src: "/images/work/beam-15.jpg", alt: "Steel beams staged on site ready for installation" },
+  { src: "/images/work/beam-16.jpg", alt: "Steel beam laid out on the driveway before being carried inside" },
+  { src: "/images/work/beam-17.jpg", alt: "Garage ceiling opened up to expose the joists before beam installation" },
+  { src: "/images/work/beam-18.jpg", alt: "Ceiling opened along the bearing line with the joists exposed" },
+  { src: "/images/work/beam-19.jpg", alt: "Temporary posts supporting the ceiling while the beam goes in" },
+  { src: "/images/work/beam-20.jpg", alt: "Large exterior opening carried on an engineered LVL beam" },
+  { src: "/images/work/beam-21.jpg", alt: "Engineered LVL beam installed above a garage opening" },
+  { src: "/images/work/beam-22.jpg", alt: "Steel beam prepared with bolt sleeves before installation" },
+  { src: "/images/work/beam-23.jpg", alt: "Steel beam delivered to site on a trailer" },
+  { src: "/images/work/beam-24.jpg", alt: "Finished opening with the new beam boxed into the ceiling" },
+  { src: "/images/work/beam-25.jpg", alt: "Bearing wall removed and the new opening framed out" },
+  { src: "/images/work/beam-26.jpg", alt: "Floor joists and the new beam carrying them overhead" },
+  { src: "/images/work/beam-27.jpg", alt: "Stripped interior during a structural renovation" },
+  { src: "/images/work/beam-28.jpg", alt: "Steel beam and post installed through a gutted main floor" },
+  { src: "/images/work/beam-29.jpg", alt: "Vaulted interior stripped back with an engineered beam overhead" },
+  { src: "/images/work/beam-30.jpg", alt: "Steel beam spanning a gutted living space" },
+  { src: "/images/work/beam-31.jpg", alt: "Steel beam picking up the floor joists above" },
+  { src: "/images/work/beam-32.jpg", alt: "New header beam framed into a widened opening" },
+];
+
+const carpentryGallery: ProjectPhoto[] = [
+  { src: "/images/work/carpentry-01.jpg", alt: "Large custom home under frame with turret and barrel-vault roof sections" },
+  { src: "/images/work/carpentry-02.jpg", alt: "Carpenter assembling a curved barrel-vault roof frame on site" },
+  { src: "/images/work/carpentry-03.jpg", alt: "Framing a pyramid turret roof with the Alberta foothills behind" },
+  { src: "/images/work/carpentry-04.jpg", alt: "Finished great room with heavy timber trusses and a stone fireplace surround" },
+  { src: "/images/work/carpentry-05.jpg", alt: "Crane lifting a prefabricated arched roof section into place" },
+  { src: "/images/work/carpentry-06.jpg", alt: "Floor deck and wall framing going up with a painted steel beam" },
+  { src: "/images/work/carpentry-07.jpg", alt: "Planed timber beam ready to be set" },
+  { src: "/images/work/carpentry-08.jpg", alt: "Roof framing laid out across a custom home" },
+  { src: "/images/work/carpentry-09.jpg", alt: "Dovetailed wooden boxes built in the shop" },
+  { src: "/images/work/carpentry-10.jpg", alt: "Custom table with a hardwood top and steel base in the shop" },
+  { src: "/images/work/carpentry-11.jpg", alt: "Custom office desk with a hardwood top" },
+  { src: "/images/work/carpentry-12.jpg", alt: "Cedar cabinet built to order" },
+  { src: "/images/work/carpentry-13.jpg", alt: "Cedar cabinet with a panelled door" },
+  { src: "/images/work/carpentry-14.jpg", alt: "Fireplace surround framed below heavy timber trusses" },
+  { src: "/images/work/carpentry-15.jpg", alt: "Stone fireplace and timber beam work complete" },
+  { src: "/images/work/carpentry-16.jpg", alt: "Long glulam beam being worked in the shop" },
+  { src: "/images/work/carpentry-17.jpg", alt: "Lumber and roof trusses delivered to a framing site" },
+  { src: "/images/work/carpentry-18.jpg", alt: "Framed shop interior with exposed ceiling joists" },
+  { src: "/images/work/carpentry-19.jpg", alt: "Modern infill home with garage and upper balcony" },
+  { src: "/images/work/carpentry-20.jpg", alt: "Carpenter framing a roof with the Calgary skyline behind" },
+  { src: "/images/work/carpentry-21.jpg", alt: "Floor framing and sheathing on a city infill build" },
+  { src: "/images/work/carpentry-22.jpg", alt: "Multi-storey building framed and sheathed" },
+  { src: "/images/work/carpentry-23.jpg", alt: "Framed garage interior during construction" },
+  { src: "/images/work/carpentry-24.jpg", alt: "Window opening framed and taped on a new addition" },
+  { src: "/images/work/carpentry-25.jpg", alt: "Carpenter framing a roof curb on a flat roof" },
+  { src: "/images/work/carpentry-26.jpg", alt: "Attic framing with an engineered beam running through" },
+  { src: "/images/work/carpentry-27.jpg", alt: "Cutting decorative timber brackets on site" },
+  { src: "/images/work/carpentry-28.jpg", alt: "Interior partition walls framed out" },
+  { src: "/images/work/carpentry-29.jpg", alt: "Vaulted interior stripped back to the framing" },
+  { src: "/images/work/carpentry-30.jpg", alt: "Open vaulted space during a full interior renovation" },
+  { src: "/images/work/carpentry-31.jpg", alt: "Crew working a long timber beam outside the house" },
+  { src: "/images/work/carpentry-32.jpg", alt: "Curved barrel-vault ceiling framed inside a custom home" },
+  { src: "/images/work/carpentry-33.jpg", alt: "Carpenter setting a curved plywood form for an arched ceiling" },
+  { src: "/images/work/carpentry-34.jpg", alt: "Crane setting a tall framed wall section" },
+];
+
+const decksGallery: ProjectPhoto[] = [
+  { src: "/images/work/decks-01.jpg", alt: "Timber pavilion with a metal roof in a landscaped yard" },
+  { src: "/images/work/decks-02.jpg", alt: "Wood stair framing built into a commercial space" },
+  { src: "/images/work/decks-03.jpg", alt: "Pergola canopy over the entry of a modern home" },
+  { src: "/images/work/decks-04.jpg", alt: "Finished stairs and railing up to a framed mezzanine" },
+  { src: "/images/work/decks-05.jpg", alt: "Interior stairs under construction" },
+  { src: "/images/work/decks-06.jpg", alt: "Timber post-and-beam pavilion in a public courtyard" },
+  { src: "/images/work/decks-07.jpg", alt: "Pergola and canopy structure on a modern home exterior" },
+  { src: "/images/work/decks-08.jpg", alt: "Cedar fence and gate with a steel frame" },
+];
+
+const excavationGallery: ProjectPhoto[] = [
+  { src: "/images/work/excavation-auger.jpg", alt: "Skid steer drilling post holes with an auger" },
+  { src: "/images/work/excavation-trailer.jpg", alt: "Skid steer loaded on a trailer at a job site" },
+  { src: "/images/work/site-acreage.jpg", alt: "Alberta acreage cleared and ready for site work" },
+  { src: "/images/work/reno-footing.jpg", alt: "Excavated footing area prepared for structural concrete" },
+  { src: "/images/work/framing-custom.jpg", alt: "New framing following excavation and site preparation" },
+];
 
 export const services = [
   {
@@ -88,28 +184,8 @@ export const services = [
       "We remove the bearing wall, install the beam and make sure the new load has somewhere solid to land.",
     icon: "beam",
     tier: "flagship",
-    photos: [
-      {
-        src: "/images/work/beam-open.jpg",
-        alt: "Open main floor after a load-bearing wall was removed and replaced with a beam",
-      },
-      {
-        src: "/images/work/beam-steel.jpg",
-        alt: "Black steel beam set into the floor joists",
-      },
-      {
-        src: "/images/work/beam-joist.jpg",
-        alt: "Steel beam and support post carrying floor joists",
-      },
-      {
-        src: "/images/work/reno-posts.jpg",
-        alt: "Steel support posts installed below a structural beam",
-      },
-      {
-        src: "/images/work/reno-footing.jpg",
-        alt: "Rebar prepared for a new concrete footing pad",
-      },
-    ],
+    photos: beamGallery.slice(0, 5),
+    gallery: beamGallery,
     detail: {
       body: [
         "When a bearing wall comes out, the load that was supported all along that wall becomes concentrated at the ends of a new steel, LVL or C-channel beam. That means support posts below and, quite often, new concrete footing pads so the load has somewhere solid to go.",
@@ -125,111 +201,51 @@ export const services = [
     },
   },
   {
-    slug: "structural-renovations",
-    title: "Structural Renovations",
+    slug: "carpentry-framing",
+    title: "General Carpentry & Framing",
     tagline:
-      "We handle the framing, beams and support underneath so the rest of the renovation starts on solid work.",
-    icon: "renovation",
-    tier: "main",
-    photos: [
-      { src: "/images/work/reno-home.jpg", alt: "Home during a structural renovation" },
-      {
-        src: "/images/work/reno-posts.jpg",
-        alt: "New steel support posts installed during a renovation",
-      },
-      {
-        src: "/images/work/reno-footing.jpg",
-        alt: "New concrete footing pad prepared for a structural post",
-      },
-      {
-        src: "/images/work/beam-open.jpg",
-        alt: "Renovated open living space carried by a new beam",
-      },
-      {
-        src: "/images/work/beam-joist.jpg",
-        alt: "Beam and post supporting joists during structural work",
-      },
-    ],
-    detail: {
-      body: [
-        "On a major renovation our part is usually the structural side: new openings, beams, posts, footing pads and the framing needed to carry the changed loads. We get that support right first so the other trades have solid, square work to follow.",
-        "The work can be invasive and dusty. If you're living in the house, we plan the access, poly and dust walls with you before work starts and coordinate closely with the other trades on site.",
-      ],
-      scope: ["Structural framing", "Beams & posts", "Footing pads", "Trade coordination"],
-    },
-  },
-  {
-    slug: "framing-additions",
-    title: "Custom Framing & Additions",
-    tagline:
-      "New framing stays square and true; additions are carefully tied into the home and the trades around them.",
+      "Framing, renovations and additions, kept square and true and tied properly into what's already there.",
     icon: "framing",
     tier: "main",
-    photos: [
-      {
-        src: "/images/work/framing-custom.jpg",
-        alt: "Large custom home being framed against a blue sky",
-      },
-      {
-        src: "/images/work/framing-arch.jpg",
-        alt: "Curved roof framing inside a custom addition",
-      },
-      {
-        src: "/images/work/framing-mezzanine.jpg",
-        alt: "Framed interior mezzanine with a wood railing",
-      },
-      {
-        src: "/images/work/beam-open.jpg",
-        alt: "Open floor plan below new structural framing",
-      },
-      {
-        src: "/images/work/reno-home.jpg",
-        alt: "Existing home where structural framing was coordinated",
-      },
-    ],
+    photos: carpentryGallery.slice(0, 5),
+    gallery: carpentryGallery,
     detail: {
       body: [
-        "We've framed houses in Calgary and area since 1990 in a wide variety of traditional and modern styles. The work is framed to the plans and left square and true for the trades that follow.",
-        "With an addition, much of the problem-solving is in the connection to the existing home: matching rooflines and exterior materials, carrying the new loads, extending mechanical systems and coordinating the work so the addition belongs there.",
+        "We've framed houses in Calgary and area since 1990, in a wide range of traditional and modern styles, and the work is left square and true for the trades that follow. On a renovation our part is usually the structural side: new openings, beams, posts, footing pads and the framing needed to carry the changed loads.",
+        "With an addition, much of the problem-solving is in the connection to the existing home — matching rooflines and exterior materials, carrying the new loads, extending mechanical systems and coordinating the work so the addition belongs there. We also take on mezzanines, timber work and custom built-ins when a job calls for them.",
       ],
-      scope: ["Custom framing", "Additions", "Roof systems", "Mezzanines", "Trade coordination"],
+      scope: [
+        "Custom framing",
+        "Additions",
+        "Structural renovations",
+        "Roof systems",
+        "Mezzanines",
+        "Timber & finish carpentry",
+        "Trade coordination",
+      ],
     },
   },
   {
     slug: "decks-stairs",
-    title: "Decks & Stairs",
+    title: "Decks, Stairs & Outdoor Structures",
     tagline:
-      "From the footings up, we build solid decks, railings and stairs around how the space will be used.",
+      "From the footings up — decks, stairs, railings and outdoor structures built around how the space gets used.",
     icon: "deck",
     tier: "secondary",
-    photos: [
-      {
-        src: "/images/work/deck-cedar.jpg",
-        alt: "Cedar deck with a metal-spindle railing and Alberta view",
-      },
-      {
-        src: "/images/work/deck-lounge.jpg",
-        alt: "Finished deck with outdoor seating and a treeline view",
-      },
-      {
-        src: "/images/work/site-acreage.jpg",
-        alt: "Acreage setting prepared for outdoor construction",
-      },
-      {
-        src: "/images/work/framing-mezzanine.jpg",
-        alt: "Wood railing and stair framing detail",
-      },
-      {
-        src: "/images/work/excavation-auger.jpg",
-        alt: "Skid steer auger used to prepare post holes",
-      },
-    ],
+    photos: decksGallery.slice(0, 5),
+    gallery: decksGallery,
     detail: {
       body: [
-        "A deck rebuild starts with the old deck coming out and the bearing underneath being sorted out, whether that means concrete footings, screw piles or another suitable approach.",
-        "From there we handle the framing, decking, railings and stairs in the materials you choose, with the size, layout and stair landing worked out around how you use the yard.",
+        "A deck rebuild starts with the old deck coming out and the bearing underneath being sorted out, whether that means concrete footings, screw piles or another suitable approach. From there we handle the framing, decking, railings and stairs in the materials you choose.",
+        "The same framing work covers stairs and railings inside a house or a commercial space, along with pergolas, pavilions, fences and gates when they're part of the job.",
       ],
-      scope: ["Deck framing", "Footings", "Decking", "Railings", "Stairs"],
+      scope: [
+        "Deck framing",
+        "Footings",
+        "Stairs & railings",
+        "Pergolas & pavilions",
+        "Fences & gates",
+      ],
     },
   },
   {
@@ -239,28 +255,8 @@ export const services = [
       "Our compact skid steer and excavator handle tight-yard digging, trenching, grading and material moving.",
     icon: "excavation",
     tier: "secondary",
-    photos: [
-      {
-        src: "/images/work/excavation-auger.jpg",
-        alt: "Skid steer drilling post holes with an auger",
-      },
-      {
-        src: "/images/work/excavation-trailer.jpg",
-        alt: "Skid steer loaded on a trailer at a job site",
-      },
-      {
-        src: "/images/work/site-acreage.jpg",
-        alt: "Alberta acreage cleared and ready for site work",
-      },
-      {
-        src: "/images/work/reno-footing.jpg",
-        alt: "Excavated footing area prepared for structural concrete",
-      },
-      {
-        src: "/images/work/framing-custom.jpg",
-        alt: "New framing following excavation and site preparation",
-      },
-    ],
+    photos: excavationGallery,
+    gallery: excavationGallery,
     detail: {
       body: [
         "We run a skid steer for excavating yards and driveways, moving gravel, loading trucks and drilling post holes, along with a 9,000 lb excavator for trenching and addition work.",
