@@ -111,9 +111,6 @@ export function GalleryModal({ service, initialPhoto = 0, onClose }: GalleryModa
           >
             {service.title}
           </h2>
-          <p className="mt-4 text-base font-medium leading-relaxed text-cream">
-            {service.tagline}
-          </p>
 
           <div className="mt-6 space-y-4">
             {service.detail.body.map((paragraph) => (
@@ -155,7 +152,7 @@ export function GalleryModal({ service, initialPhoto = 0, onClose }: GalleryModa
               onClick={onClose}
               className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-brand px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-brand-hover"
             >
-              Request a Quote
+              Request a Consultation
               <Icon name="arrowRight" className="h-5 w-5" />
             </Link>
           </div>

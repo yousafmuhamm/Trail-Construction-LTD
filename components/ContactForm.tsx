@@ -158,7 +158,7 @@ export function ContactForm() {
           disabled={status === "submitting"}
           className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {status === "submitting" ? "Sending…" : "Request a Quote"}
+          {status === "submitting" ? "Sending…" : "Request a Consultation"}
           {status !== "submitting" && <Icon name="arrowRight" className="h-5 w-5" />}
         </button>
 

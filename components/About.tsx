@@ -27,16 +27,16 @@ export function About() {
             {about.heading}
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">
-            Trail Construction has worked without interruption across south central Alberta since {business.foundedYear}. Today, Ken&apos;s work is centred on bearing-wall removals, beam installations and the structural carpentry around them.
+            Trail Construction has worked without interruption across south central Alberta since {business.foundedYear}. Today, Ken&apos;s work is centred on bearing-wall removals, beam installations and structural carpentry.
           </p>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
-            Decades alongside builders, homeowners and other trades have taught us how to plan the work carefully and leave a solid result for whoever follows.
+            We have worked alongside builders, homeowners and other trades, which has given us a lot of experience and requires a lot of coordination.
           </p>
           <Link
             href="/about"
             className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm border border-line px-5 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand hover:text-brand-hover sm:w-auto"
           >
-            More about us
+            More About Us
             <Icon
               name="arrowRight"
               className="h-4 w-4 transition-transform group-hover:translate-x-1"

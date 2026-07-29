@@ -12,7 +12,7 @@ export function AboutContent() {
         <Reveal>
           <SectionLabel tone="dark">{about.label}</SectionLabel>
           <h1 className="mt-5 max-w-4xl font-heading text-4xl font-semibold leading-[1.04] text-white sm:text-5xl lg:text-6xl">
-            Structural experience built over decades.
+            Structural Experience Built Over Decades.
           </h1>
         </Reveal>
 

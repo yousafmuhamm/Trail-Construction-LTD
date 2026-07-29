@@ -21,8 +21,7 @@ export function Footer() {
               style={{ filter: "brightness(0) invert(1)" }}
             />
             <p className="mt-4 text-sm leading-relaxed text-cream-soft">
-              Structural carpentry done right since {business.foundedYear}. Beams, load-bearing
-              walls, framing and additions across {business.serviceArea}.
+              Framing, Carpentry, and Structural Renovations Since {business.foundedYear}
             </p>
           </div>
 

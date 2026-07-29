@@ -2,7 +2,7 @@
  * Trail Construction Ltd. - site content
  * --------------------------------------
  * Single, typed source of truth for site copy and image references.
- * Job photos live under /images/work. Excavation photos are still placeholders.
+ * Job photos live under /images/work.
  */
 
 import type { IconName } from "@/components/Icon";
@@ -14,7 +14,7 @@ export const business = {
   incorporatedYear: 2000,
   yearsExperience: "35+",
   city: "Calgary",
-  serviceArea: "Calgary, Olds & Central Alberta",
+  serviceArea: "Calgary & Olds",
   phone: "403-660-6198",
   phoneHref: "tel:+14036606198",
   email: "57grass@gmail.com",
@@ -28,14 +28,14 @@ export const nav = {
     { label: "About", href: "/about" },
     { label: "Contact", href: "/#contact" },
   ],
-  cta: { label: "Request a Quote", href: "/#contact" },
+  cta: { label: "Request a Consultation", href: "/#contact" },
 } as const;
 
 export const hero = {
-  headline: ["Steel beam installations", "and structural carpentry."],
+  headline: ["Steel Beam Installations", "and Structural Carpentry."],
   subhead:
-    "Trail Construction Ltd. has been building in south central Alberta since 1988. In the last number of years our work has been mostly load-bearing wall removals and beam installations, alongside the framing, renovations and decks we've always done.",
-  primaryCta: { label: "Request a Quote", href: "/#contact" },
+    "Trail Construction Ltd. has been building in south central Alberta since 1988. In the last number of years our work has been mostly load-bearing wall removals and beam installations, alongside custom house framing, renovations, and deck building.",
+  primaryCta: { label: "Request a Consultation", href: "/#contact" },
   secondaryCta: { label: "See Our Work", href: "/#services" },
   image: {
     src: "/images/hero-workshop-blueprints.png",
@@ -43,14 +43,18 @@ export const hero = {
   },
   stats: [
     { icon: "award", top: "35+", bottom: "Years in Business", emphasize: true },
-    { icon: "calendar", top: "South Central", bottom: "Alberta Since 1988" },
-    { icon: "building", top: "Beams, Walls", bottom: "& Structural Work" },
+    { icon: "calendar", top: "Calgary and South Central", bottom: "Alberta Since 1988" },
+    {
+      icon: "building",
+      top: "Beam Installations",
+      bottom: "Structural Renovations & Custom House Framing",
+    },
   ],
 } as const;
 
 export const about = {
   label: "About Trail Construction",
-  heading: "In business since 1988.",
+  heading: "In Business Since 1988.",
   body: [
     "Trail Construction Ltd. has been in business in south central Alberta since 1988. We started out in the Sundre area, and have worked mostly in Calgary and Olds and the surrounding areas ever since. We've been in business without interruption since starting, and incorporated with the Province of Alberta in 2000.",
     "Our work has been mostly in custom house framing, but in the last number of years much more in the area of bearing wall removals and beam installations. We've also been involved with major renovations, deck and stair building, mezzanines, and many other carpentry-related tasks as they're needed. A small excavator and skid steer have been very useful for these ancillary projects.",
@@ -64,7 +68,6 @@ export type ProjectPhoto = { src: string; alt: string };
 export type ServiceShowcase = {
   slug: string;
   title: string;
-  tagline: string;
   icon: IconName;
   tier: "flagship" | "main" | "secondary";
   /** Five-photo preview shown on the service card's PhotoStack. */
@@ -79,9 +82,7 @@ export type ServiceShowcase = {
 
 export const servicesContent = {
   label: "The Work We Do",
-  heading: "What we build.",
-  intro:
-    "Bearing-wall removal and beam installation are the heart of what we do now. Around that we take on framing, renovations, additions and finish carpentry, with decks, stairs and site work where they fit.",
+  heading: "What We Build.",
   link: { label: "Talk to Us About Your Project", href: "/#contact" },
 } as const;
 
@@ -169,19 +170,23 @@ const decksGallery: ProjectPhoto[] = [
 ];
 
 const excavationGallery: ProjectPhoto[] = [
-  { src: "/images/work/excavation-auger.jpg", alt: "Skid steer drilling post holes with an auger" },
-  { src: "/images/work/excavation-trailer.jpg", alt: "Skid steer loaded on a trailer at a job site" },
-  { src: "/images/work/site-acreage.jpg", alt: "Alberta acreage cleared and ready for site work" },
-  { src: "/images/work/reno-footing.jpg", alt: "Excavated footing area prepared for structural concrete" },
-  { src: "/images/work/framing-custom.jpg", alt: "New framing following excavation and site preparation" },
+  { src: "/images/work/excavation-01.jpg", alt: "Skid steer drilling post holes with an auger attachment" },
+  { src: "/images/work/excavation-02.jpg", alt: "Mini excavator digging a trench along a fence line" },
+  { src: "/images/work/excavation-03.jpg", alt: "Graded and gravelled yard finished around a new build" },
+  { src: "/images/work/excavation-04.jpg", alt: "New conduit laid in the bottom of a freshly dug trench" },
+  { src: "/images/work/excavation-05.jpg", alt: "Case CX36B mini excavator on an acreage ready for site work" },
+  { src: "/images/work/excavation-06.jpg", alt: "Mini excavator working alongside a house addition" },
+  { src: "/images/work/excavation-07.jpg", alt: "Trench cut through frozen ground with new conduit run in" },
+  { src: "/images/work/excavation-08.jpg", alt: "Skid steer clearing brush and roots into a waste bin" },
+  { src: "/images/work/excavation-09.jpg", alt: "Skid steer moving cut logs off a property" },
+  { src: "/images/work/excavation-10.jpg", alt: "Skid steer forks lifting an old brick barbecue out of a yard" },
+  { src: "/images/work/excavation-11.jpg", alt: "Skid steer loaded on the trailer for transport to a job site" },
 ];
 
 export const services = [
   {
     slug: "beam-wall",
     title: "Wall Removal & Steel Beam Installation",
-    tagline:
-      "We remove the bearing wall, install the beam and make sure the new load has somewhere solid to land.",
     icon: "beam",
     tier: "flagship",
     photos: beamGallery.slice(0, 5),
@@ -203,8 +208,6 @@ export const services = [
   {
     slug: "carpentry-framing",
     title: "General Carpentry & Framing",
-    tagline:
-      "Framing, renovations and additions, kept square and true and tied properly into what's already there.",
     icon: "framing",
     tier: "main",
     photos: carpentryGallery.slice(0, 5),
@@ -228,8 +231,6 @@ export const services = [
   {
     slug: "decks-stairs",
     title: "Decks, Stairs & Outdoor Structures",
-    tagline:
-      "From the footings up — decks, stairs, railings and outdoor structures built around how the space gets used.",
     icon: "deck",
     tier: "secondary",
     photos: decksGallery.slice(0, 5),
@@ -251,11 +252,9 @@ export const services = [
   {
     slug: "excavation-site-prep",
     title: "Excavation & Site Prep",
-    tagline:
-      "Our compact skid steer and excavator handle tight-yard digging, trenching, grading and material moving.",
     icon: "excavation",
     tier: "secondary",
-    photos: excavationGallery,
+    photos: excavationGallery.slice(0, 5),
     gallery: excavationGallery,
     detail: {
       body: [
@@ -277,7 +276,7 @@ export type Testimonial = {
 /** Disabled until real, permissioned client testimonials are available. */
 export const testimonials = {
   label: "Client Reviews",
-  heading: "Work that earns repeat business.",
+  heading: "Work That Earns Repeat Business.",
   intro:
     "References can be provided for both the craftsmanship side and the business side of our work.",
   items: [] as Testimonial[],
@@ -292,32 +291,32 @@ export type Step = {
 
 export const process = {
   label: "How We Can Help You",
-  heading: "From the first call to a clear quote.",
+  heading: "From the First Call to a Clear Quotation.",
   steps: [
     {
       number: "01",
-      title: "Get in touch",
+      title: "Get in Touch",
       description:
         "Call or text any time. If we can't pick up, we're usually back to you shortly. We'll talk through your project on the phone first.",
       icon: "consult",
     },
     {
       number: "02",
-      title: "A look in person",
+      title: "A Site Visit",
       description:
         "We come to your site or home to see it in person. Once we understand what you're after, we suggest some ideas and, if an engineer is required, tell you what you'll likely need to provide them.",
       icon: "plan",
     },
     {
       number: "03",
-      title: "A clear quotation",
+      title: "A Clear Quotation",
       description:
-        "A well-thought-out quote with clear pricing, payment terms, what's included and excluded, expectations both ways, and liability information.",
+        "A well thought out quotation with clear pricing, payment terms, what's included and excluded, expectations both ways, and liability information.",
       icon: "build",
     },
     {
       number: "04",
-      title: "The work, done right",
+      title: "Engineering Consultation",
       description:
         "We do the structural work under the engineer's specs and coordinate closely with your other trades. References can be provided for both the craftsmanship and the business side.",
       icon: "deliver",
@@ -327,9 +326,9 @@ export const process = {
 
 export const contact = {
   label: "Get In Touch",
-  heading: "Ready to talk about your project?",
+  heading: "Contact Us to Discuss Your Project",
   intro:
-    "Tell us what you're planning by phone, text or the form below, and we'll get back to you shortly. We may not be able to help everyone - sometimes it's price, timing or scope - but we can often point you in a helpful direction.",
+    "Tell us what you're planning by phone, text, or the form below, and we'll get back to you shortly. We may not be able to help everyone - sometimes it's price, timing or scope - but we can often point you in a helpful direction.",
   projectTypes: [
     "Steel Beam Installation",
     "Load-Bearing Wall Removal",

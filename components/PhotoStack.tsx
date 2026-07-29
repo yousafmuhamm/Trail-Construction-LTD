@@ -12,8 +12,8 @@ const RISE_MS = 560;
 
 const FRAME: Record<Size, { wrap: string; inner: string }> = {
   flagship: {
-    wrap: "min-h-[20rem] px-5 py-6 sm:min-h-[26rem] sm:px-6 sm:py-8",
-    inner: "max-w-[32rem] aspect-[4/3]",
+    wrap: "min-h-[17rem] px-5 py-5 sm:min-h-[21rem] sm:px-6 sm:py-7",
+    inner: "max-w-[30rem] aspect-[16/11]",
   },
   standard: {
     wrap: "min-h-[15rem] px-4 py-6",
@@ -48,7 +48,7 @@ function Photo({ photo }: { photo: { src: string; alt: string } }) {
 /**
  * A tidy little deck of job photos. At rest it's a clean stack with a thin edge.
  * Tapping pulls the next photo down into the deck and deals it up onto the top
- * with a slight overshoot. Browsing only — the "See the work" button opens the modal.
+ * with a slight overshoot. Browsing only — the "See the Work" button opens the modal.
  */
 export function PhotoStack({
   photos,

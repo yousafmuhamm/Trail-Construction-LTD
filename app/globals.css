@@ -18,6 +18,8 @@
   --color-brand-soft: #79d3a0; /* light green for labels/icons on dark backgrounds */
 
   /* Brass accent — used sparingly for eyebrow bars, hover details, stat icons. */
+  --color-navy: #1c3d63; /* hero secondary CTA — white text passes AA (8.9:1) */
+  --color-navy-hover: #16314f;
   --color-brass: #c79a4b;
   --color-brass-soft: #d9b878;
 
