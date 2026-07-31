@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
@@ -8,20 +7,8 @@ import { about, business } from "@/lib/content";
 export function About() {
   return (
     <section className="bg-white py-16 sm:py-20">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 sm:px-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
-          <div className="relative aspect-[16/11] overflow-hidden rounded-lg bg-charcoal md:aspect-[4/3]">
-            <Image
-              src="/images/crew-site.jpg"
-              alt="Trail Construction crew working on a job site"
-              fill
-              sizes="(max-width: 768px) 100vw, 42vw"
-              className="object-cover"
-            />
-          </div>
-        </Reveal>
-
-        <Reveal delay={100}>
           <SectionLabel>{about.label}</SectionLabel>
           <h2 className="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[2.5rem] lg:leading-[1.12]">
             {about.heading}

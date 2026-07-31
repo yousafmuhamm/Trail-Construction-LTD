@@ -174,15 +174,7 @@ export function Services() {
         </div>
 
         <Reveal className="mt-12 border-t border-line pt-8 sm:mt-14 sm:pt-10">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h3 className="font-heading text-2xl font-bold text-ink">We Also Do</h3>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-soft">
-                We have the equipment and experience to handle these when they fit the job.
-              </p>
-            </div>
-          </div>
-          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          <div className="grid gap-5 lg:grid-cols-2">
             {secondary.map((service) => (
               <SecondaryServiceCard
                 key={service.slug}

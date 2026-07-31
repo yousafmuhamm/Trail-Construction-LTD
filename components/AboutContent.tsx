@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
@@ -16,8 +15,8 @@ export function AboutContent() {
           </h1>
         </Reveal>
 
-        <div className="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.75fr)] lg:gap-16">
-          <Reveal className="order-2 lg:order-1">
+        <div className="mt-10">
+          <Reveal>
             <div className="max-w-3xl space-y-5">
               {about.body.map((paragraph) => (
                 <p key={paragraph} className="text-base leading-relaxed text-cream-soft sm:text-lg">
@@ -43,19 +42,6 @@ export function AboutContent() {
                 See our services
                 <Icon name="arrowRight" className="h-5 w-5" />
               </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={100} className="order-1 lg:order-2">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-forest lg:aspect-[4/5]">
-              <Image
-                src="/images/crew-site.jpg"
-                alt="Ken and the Trail Construction crew on a job site"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 38vw"
-                className="object-cover"
-              />
             </div>
           </Reveal>
         </div>

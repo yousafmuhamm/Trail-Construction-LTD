@@ -186,7 +186,7 @@ const excavationGallery: ProjectPhoto[] = [
 export const services = [
   {
     slug: "beam-wall",
-    title: "Wall Removal & Steel Beam Installation",
+    title: "Bearing Wall Removal & Steel Beam Installations",
     icon: "beam",
     tier: "flagship",
     photos: beamGallery.slice(0, 5),
@@ -251,7 +251,7 @@ export const services = [
   },
   {
     slug: "excavation-site-prep",
-    title: "Excavation & Site Prep",
+    title: "Excavation: Trenching Site Prep & Post Hole Drilling",
     icon: "excavation",
     tier: "secondary",
     photos: excavationGallery.slice(0, 5),
