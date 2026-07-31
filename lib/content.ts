@@ -193,8 +193,13 @@ export const services = [
     gallery: beamGallery,
     detail: {
       body: [
-        "When a bearing wall comes out, the load that was supported all along that wall becomes concentrated at the ends of a new steel, LVL or C-channel beam. That means support posts below and, quite often, new concrete footing pads so the load has somewhere solid to go.",
-        "We have all the jacks, winches and related equipment for the work, and install everything under the engineer's instruction. Wall removal is invasive and dusty, so when you're living in the house we work out the poly and dust walls with you beforehand.",
+        "We have, especially in the last number of years, removed a lot of load-bearing walls, and installed many steel beams, LVL (engineered) beams, C-channel steel and timber.",
+        "This usually means that a roof or second floor changes from a uniformly supported load, to a concentrated load.",
+        "Therefore, the required installation of support posts, and quite often new concrete footing pads.",
+        "We have all the jacks, winches and related equipment to do this work.",
+        "This work is typically invasive and dusty. Dust goes everywhere, so poly sheets and walls need to be put up if customer is living in the house. This is usually done in collaboration with the customer.",
+        "Our work on beam installations is usually limited to the structural side of things, but we will work to accommodate heating and plumbing that are in the walls.",
+        "We do this work under the instruction of engineers.",
       ],
       scope: [
         "Bearing-wall removal",
@@ -214,8 +219,9 @@ export const services = [
     gallery: carpentryGallery,
     detail: {
       body: [
-        "We've framed houses in Calgary and area since 1990, in a wide range of traditional and modern styles, and the work is left square and true for the trades that follow. On a renovation our part is usually the structural side: new openings, beams, posts, footing pads and the framing needed to carry the changed loads.",
-        "With an addition, much of the problem-solving is in the connection to the existing home — matching rooflines and exterior materials, carrying the new loads, extending mechanical systems and coordinating the work so the addition belongs there. We also take on mezzanines, timber work and custom built-ins when a job calls for them.",
+        "Custom House Framing: in Calgary and area starting in 1990. We have framed houses in a very wide variety, traditional and modern styles.",
+        "Additions: We can help with problem solving and the coordination of connecting an existing building to a new addition: exterior building materials, mechanical extensions etc.",
+        "Renovations: Our part in a renovation is usually limited to the structural side of the work, framing, beams, etc.",
       ],
       scope: [
         "Custom framing",
@@ -237,8 +243,14 @@ export const services = [
     gallery: decksGallery,
     detail: {
       body: [
-        "A deck rebuild starts with the old deck coming out and the bearing underneath being sorted out, whether that means concrete footings, screw piles or another suitable approach. From there we handle the framing, decking, railings and stairs in the materials you choose.",
-        "The same framing work covers stairs and railings inside a house or a commercial space, along with pergolas, pavilions, fences and gates when they're part of the job.",
+        "1. A deck rebuild will require the removal of the old deck.",
+        "2. Perhaps adding earth in that location if it has sunken down near the house, or placing gravel or landscape cloth to keep down the weeds.",
+        "3. Sometimes removal of siding or stucco to attach new stringer to house.",
+        "4. Determine deck size and layout.",
+        "5. Installation of new concrete or screw piles or other bearing alternatives.",
+        "6. Determine the kind of wood or materials to be used, and possible staining of wood.",
+        "7. Decide on type of railings.",
+        "8. Stairs and what stairs will bear on.",
       ],
       scope: [
         "Deck framing",
@@ -258,8 +270,8 @@ export const services = [
     gallery: excavationGallery,
     detail: {
       body: [
-        "We run a skid steer for excavating yards and driveways, moving gravel, loading trucks and drilling post holes, along with a 9,000 lb excavator for trenching and addition work.",
-        "Both machines are compact enough for tight spaces and back yards. Having them available is especially useful when the site work supports a carpentry project and needs to stay on the same schedule.",
+        "Skidsteer: (Bobcat) for excavation of yards and driveways, loading and spreading gravel, etc. Also drilling holes for posts for building fences and gates.",
+        "Excavator: (9000 lb machine) for trenching, excavation of additions, and loading trucks. Machines are suitable for tight spaces in back yards.",
       ],
       scope: ["Post holes", "Trenching", "Grading", "Material moving", "Tight-access work"],
     },
