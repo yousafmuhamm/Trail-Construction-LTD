@@ -7,17 +7,17 @@ import { about, business } from "@/lib/content";
 export function AboutContent() {
   return (
     <section id="top" className="bg-charcoal pb-20 pt-32 text-cream sm:pb-28 sm:pt-40">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <Reveal>
           <SectionLabel tone="dark">{about.label}</SectionLabel>
-          <h1 className="mt-5 max-w-4xl font-heading text-4xl font-semibold leading-[1.04] text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 font-heading text-4xl font-semibold leading-[1.04] text-white sm:text-5xl lg:text-6xl">
             Structural Experience Built Over Decades.
           </h1>
         </Reveal>
 
         <div className="mt-10">
           <Reveal>
-            <div className="max-w-3xl space-y-5">
+            <div className="space-y-5">
               {about.body.map((paragraph) => (
                 <p key={paragraph} className="text-base leading-relaxed text-cream-soft sm:text-lg">
                   {paragraph}

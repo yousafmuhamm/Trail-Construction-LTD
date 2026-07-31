@@ -7,16 +7,16 @@ import { about, business } from "@/lib/content";
 export function About() {
   return (
     <section className="bg-white py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <Reveal>
           <SectionLabel>{about.label}</SectionLabel>
           <h2 className="mt-4 font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[2.5rem] lg:leading-[1.12]">
             {about.heading}
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft">
+          <p className="mt-4 text-base leading-relaxed text-ink-soft">
             Trail Construction has worked without interruption across south central Alberta since {business.foundedYear}. Today, Ken&apos;s work is centred on bearing-wall removals, beam installations and structural carpentry.
           </p>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-soft">
+          <p className="mt-3 text-base leading-relaxed text-ink-soft">
             We have worked alongside builders, homeowners and other trades, which has given us a lot of experience and requires a lot of coordination.
           </p>
           <Link
