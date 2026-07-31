@@ -39,21 +39,32 @@ into `public/images/`). No component changes needed.
 
 ## Contact form
 
-`components/ContactForm.tsx` is **Formspree-ready**. Create a form at
-[formspree.io](https://formspree.io) and set the endpoint:
+`components/ContactForm.tsx` POSTs to `app/api/contact/route.ts`, which sends the
+lead through [EmailJS](https://www.emailjs.com). The route runs server-side, so
+the EmailJS private key is never shipped to the browser.
+
+Copy `.env.example` to `.env.local` and fill in:
 
 ```bash
-# .env.local
-NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/yourid
+EMAILJS_SERVICE_ID=service_xxxxxxx
+EMAILJS_TEMPLATE_ID=template_xxxxxxx
+EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxx
+EMAILJS_PRIVATE_KEY=xxxxxxxxxxxxxxxx
+CONTACT_TO_EMAIL=57grass@gmail.com   # optional, defaults to business.email
 ```
 
-With no endpoint set, the form runs a local success state so the demo works
-end-to-end. **Wire the endpoint before launch** so leads actually send.
+The email body is composed as plain text in the route handler, so the EmailJS
+dashboard template only needs `{{message}}` as its content (with `{{subject}}`
+as the subject and `{{reply_to}}` as the reply-to). Set the template's **To
+Email** to `{{to_email}}`.
+
+Deploying: add the same four variables in the Vercel project's environment
+settings — `.env.local` is gitignored and does not ship.
 
 ## Before launch — client to supply
 
 - Real job-site / project photography (replace everything in `public/images/`).
 - Final copy approval (all copy lives in `lib/content.ts`).
 - Logo file (a placeholder wordmark + beam mark is used in nav/footer).
-- Formspree (or Resend) endpoint for the contact form.
+- EmailJS service + template IDs for the contact form.
 - Domain / DNS pointed at Vercel.

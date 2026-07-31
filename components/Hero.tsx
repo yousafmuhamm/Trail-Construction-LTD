@@ -9,7 +9,6 @@ export function Hero() {
       id="top"
       className="relative isolate overflow-hidden bg-charcoal sm:flex sm:min-h-[100svh] sm:items-center"
     >
-      {/* Background photo — PLACEHOLDER, see public/images/README.md */}
       {/* The photo is 16:9. Inside a screen-tall mobile box object-cover would
           throw away ~80% of its width, so on mobile it gets its own wide band at
           the top and the copy sits below it. From sm up this reverts to the

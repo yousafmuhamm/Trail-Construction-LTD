@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local caches and agent worktrees — gitignored, but eslint still walks them.
+    ".claude/**",
+    ".next.previous-preview-cache/**",
   ]),
 ]);
 

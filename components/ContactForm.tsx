@@ -7,13 +7,10 @@ import { contact } from "@/lib/content";
 type Status = "idle" | "submitting" | "success" | "error";
 
 /**
- * Lead form. If NEXT_PUBLIC_FORMSPREE_ENDPOINT is set it POSTs there
- * (https://formspree.io — create a form, paste the endpoint into .env.local).
- * If it's unset, the form falls back to a local "thanks" state so the demo works
- * end-to-end — wire up the endpoint before launch so leads actually send.
+ * Lead form. Posts to /api/contact, which sends the email through EmailJS.
+ * The EmailJS keys live server-side in .env.local — nothing secret reaches the
+ * browser. See app/api/contact/route.ts.
  */
-const ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
-
 const fieldClass =
   "w-full rounded-md border border-line bg-white px-4 py-3 text-ink placeholder:text-ink-soft/70 transition-colors focus:border-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40";
 
@@ -26,17 +23,19 @@ export function ContactForm() {
     setStatus("submitting");
 
     try {
-      if (ENDPOINT) {
-        const res = await fetch(ENDPOINT, {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body: new FormData(form),
-        });
-        if (!res.ok) throw new Error("Request failed");
-      } else {
-        // No endpoint configured — simulate a send so the demo flows.
-        await new Promise((r) => setTimeout(r, 700));
-      }
+      const data = new FormData(form);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          phone: data.get("phone"),
+          email: data.get("email"),
+          projectType: data.get("projectType"),
+          message: data.get("message"),
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
       form.reset();
       setStatus("success");
     } catch {
