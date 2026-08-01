@@ -99,8 +99,18 @@ export async function POST(request: Request) {
         isVercel: process.env.VERCEL ?? null,
         // Every env var NAME the function can see (never values). Distinguishes
         // "not attached to this deployment" from "stripped by the edge runtime".
-        allNames: Object.keys(process.env).sort(),
         edgeRuntime: typeof (globalThis as { EdgeRuntime?: unknown }).EdgeRuntime,
+        // Non-secret Vercel system values identifying exactly which project,
+        // repo and commit is serving this request.
+        deployment: {
+          projectName: process.env.VERCEL_PROJECT_NAME ?? null,
+          projectId: process.env.VERCEL_PROJECT_ID ?? null,
+          targetEnv: process.env.VERCEL_TARGET_ENV ?? null,
+          repo: `${process.env.VERCEL_GIT_REPO_OWNER ?? "?"}/${process.env.VERCEL_GIT_REPO_SLUG ?? "?"}`,
+          branch: process.env.VERCEL_GIT_COMMIT_REF ?? null,
+          commit: (process.env.VERCEL_GIT_COMMIT_SHA ?? "").slice(0, 7) || null,
+          productionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL ?? null,
+        },
       },
       { status: 500 },
     );
