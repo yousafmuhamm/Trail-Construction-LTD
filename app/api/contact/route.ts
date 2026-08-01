@@ -63,8 +63,12 @@ function buildEmailBody(lead: Record<LeadField, string>): string {
 }
 
 export async function POST(request: Request) {
-  const { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, EMAILJS_PRIVATE_KEY } =
-    process.env;
+  // Direct property access rather than destructuring process.env: it is the form
+  // Next.js can statically analyse, so it works under every runtime.
+  const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+  const EMAILJS_PRIVATE_KEY = process.env.EMAILJS_PRIVATE_KEY;
 
   if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY || !EMAILJS_PRIVATE_KEY) {
     // TEMPORARY DIAGNOSTIC - remove once the Vercel env vars are confirmed working.
@@ -83,7 +87,17 @@ export async function POST(request: Request) {
       .sort();
     console.error(`[contact] Missing EmailJS env vars: ${missing.join(", ")}`);
     return Response.json(
-      { error: "Email is not configured.", missing, visibleNames: emailjsNames },
+      {
+        error: "Email is not configured.",
+        missing,
+        visibleNames: emailjsNames,
+        // Is process.env populated at all? If VERCEL_ENV is visible and the
+        // EmailJS names are not, the variables are simply absent from this
+        // project/environment rather than being stripped by the runtime.
+        envKeyCount: Object.keys(process.env).length,
+        vercelEnv: process.env.VERCEL_ENV ?? null,
+        isVercel: process.env.VERCEL ?? null,
+      },
       { status: 500 },
     );
   }
