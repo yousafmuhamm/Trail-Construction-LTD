@@ -1,17 +1,23 @@
+import nodemailer from "nodemailer";
 import { business } from "@/lib/content";
 
 /**
- * Contact form -> EmailJS.
+ * Contact form -> SMTP (Nodemailer).
  *
- * This runs on the server so the EmailJS *private* key is never shipped to the
- * browser. The email body is built here as plain text, which means the EmailJS
- * dashboard template can stay dumb: its content only needs to be `{{message}}`.
+ * Runs server-side so the mailbox password never reaches the browser. The email
+ * body is composed here as plain text, so there is no dashboard template to keep
+ * in sync anywhere — what you see in buildEmailBody() is what lands in the inbox.
  *
  * Required env (see .env.example):
- *   EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, EMAILJS_PRIVATE_KEY
+ *   SMTP_USER, SMTP_PASS
+ * Optional:
+ *   SMTP_HOST, SMTP_PORT (default to Gmail), CONTACT_TO_EMAIL
  */
 
-const EMAILJS_ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send";
+// Nodemailer opens a real TCP socket, so this route cannot run on the edge.
+export const runtime = "nodejs";
+// An SMTP handshake on a cold start is slower than an HTTP call; give it room.
+export const maxDuration = 20;
 
 /** Where leads land. Defaults to the address shown on the site. */
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || business.email;
@@ -62,58 +68,38 @@ function buildEmailBody(lead: Record<LeadField, string>): string {
   ].join("\n");
 }
 
+/**
+ * Built once per warm serverless instance and reused, so repeat submissions
+ * skip the TLS + auth handshake. `pool` keeps the connection alive between them.
+ */
+let transporter: nodemailer.Transporter | null = null;
+
+function getTransporter(user: string, pass: string): nodemailer.Transporter {
+  if (transporter) return transporter;
+
+  // Defaults target Gmail — implicit TLS on 465 — so a Gmail sender only needs
+  // SMTP_USER and SMTP_PASS. Any other provider can override host/port.
+  const port = Number(process.env.SMTP_PORT) || 465;
+  transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || "smtp.gmail.com",
+    port,
+    secure: port === 465, // 587 upgrades via STARTTLS instead
+    auth: { user, pass },
+    pool: true,
+    maxConnections: 1,
+  });
+  return transporter;
+}
+
 export async function POST(request: Request) {
   // Direct property access rather than destructuring process.env: it is the form
   // Next.js can statically analyse, so it works under every runtime.
-  const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
-  const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
-  const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
-  const EMAILJS_PRIVATE_KEY = process.env.EMAILJS_PRIVATE_KEY;
+  const SMTP_USER = process.env.SMTP_USER;
+  const SMTP_PASS = process.env.SMTP_PASS;
 
-  if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY || !EMAILJS_PRIVATE_KEY) {
-    // TEMPORARY DIAGNOSTIC - remove once the Vercel env vars are confirmed working.
-    // Reports variable *names* only, never values. These names are already public
-    // in .env.example, so nothing secret is disclosed.
-    const missing = Object.entries({
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      EMAILJS_PUBLIC_KEY,
-      EMAILJS_PRIVATE_KEY,
-    })
-      .filter(([, v]) => !v)
-      .map(([k]) => k);
-    const emailjsNames = Object.keys(process.env)
-      .filter((k) => k.startsWith("EMAILJS") || k.startsWith("CONTACT_"))
-      .sort();
-    console.error(`[contact] Missing EmailJS env vars: ${missing.join(", ")}`);
-    return Response.json(
-      {
-        error: "Email is not configured.",
-        missing,
-        visibleNames: emailjsNames,
-        // Is process.env populated at all? If VERCEL_ENV is visible and the
-        // EmailJS names are not, the variables are simply absent from this
-        // project/environment rather than being stripped by the runtime.
-        envKeyCount: Object.keys(process.env).length,
-        vercelEnv: process.env.VERCEL_ENV ?? null,
-        isVercel: process.env.VERCEL ?? null,
-        // Every env var NAME the function can see (never values). Distinguishes
-        // "not attached to this deployment" from "stripped by the edge runtime".
-        edgeRuntime: typeof (globalThis as { EdgeRuntime?: unknown }).EdgeRuntime,
-        // Non-secret Vercel system values identifying exactly which project,
-        // repo and commit is serving this request.
-        deployment: {
-          projectName: process.env.VERCEL_PROJECT_NAME ?? null,
-          projectId: process.env.VERCEL_PROJECT_ID ?? null,
-          targetEnv: process.env.VERCEL_TARGET_ENV ?? null,
-          repo: `${process.env.VERCEL_GIT_REPO_OWNER ?? "?"}/${process.env.VERCEL_GIT_REPO_SLUG ?? "?"}`,
-          branch: process.env.VERCEL_GIT_COMMIT_REF ?? null,
-          commit: (process.env.VERCEL_GIT_COMMIT_SHA ?? "").slice(0, 7) || null,
-          productionUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL ?? null,
-        },
-      },
-      { status: 500 },
-    );
+  if (!SMTP_USER || !SMTP_PASS) {
+    console.error("[contact] Missing SMTP env vars: SMTP_USER and/or SMTP_PASS");
+    return Response.json({ error: "Email is not configured." }, { status: 500 });
   }
 
   let payload: unknown;
@@ -140,31 +126,20 @@ export async function POST(request: Request) {
     return Response.json({ error: "Please enter a valid email address." }, { status: 400 });
   }
 
-  const res = await fetch(EMAILJS_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service_id: EMAILJS_SERVICE_ID,
-      template_id: EMAILJS_TEMPLATE_ID,
-      user_id: EMAILJS_PUBLIC_KEY,
-      accessToken: EMAILJS_PRIVATE_KEY,
-      template_params: {
-        to_email: TO_EMAIL,
-        subject: `New ${lead.projectType} enquiry - ${lead.name}`,
-        from_name: lead.name,
-        reply_to: lead.email,
-        phone: lead.phone,
-        project_type: lead.projectType,
-        message: buildEmailBody(lead),
-      },
-    }),
-  });
-
-  if (!res.ok) {
-    // EmailJS returns the reason as plain text. Log it, but never surface it -
-    // the response can echo back configuration details.
-    const detail = await res.text().catch(() => "");
-    console.error(`[contact] EmailJS responded ${res.status}: ${detail}`);
+  try {
+    await getTransporter(SMTP_USER, SMTP_PASS).sendMail({
+      // Gmail rewrites From to the authenticated mailbox anyway, so send as
+      // ourselves and put the lead on Reply-To — hitting reply answers them.
+      from: `"${business.name} Website" <${SMTP_USER}>`,
+      to: TO_EMAIL,
+      replyTo: `"${lead.name}" <${lead.email}>`,
+      subject: `New ${lead.projectType} enquiry - ${lead.name}`,
+      text: buildEmailBody(lead),
+    });
+  } catch (error) {
+    // Log the real reason, but never surface it - SMTP errors echo back the
+    // host and account being used.
+    console.error("[contact] SMTP send failed:", error);
     return Response.json({ error: "Could not send message." }, { status: 502 });
   }
 

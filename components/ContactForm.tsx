@@ -7,9 +7,9 @@ import { contact } from "@/lib/content";
 type Status = "idle" | "submitting" | "success" | "error";
 
 /**
- * Lead form. Posts to /api/contact, which sends the email through EmailJS.
- * The EmailJS keys live server-side in .env.local — nothing secret reaches the
- * browser. See app/api/contact/route.ts.
+ * Lead form. Posts to /api/contact, which mails the lead out over SMTP.
+ * The mailbox credentials live server-side in .env.local — nothing secret
+ * reaches the browser. See app/api/contact/route.ts.
  */
 const fieldClass =
   "w-full rounded-md border border-line bg-white px-4 py-3 text-ink placeholder:text-ink-soft/70 transition-colors focus:border-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40";

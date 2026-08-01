@@ -39,32 +39,36 @@ into `public/images/`). No component changes needed.
 
 ## Contact form
 
-`components/ContactForm.tsx` POSTs to `app/api/contact/route.ts`, which sends the
-lead through [EmailJS](https://www.emailjs.com). The route runs server-side, so
-the EmailJS private key is never shipped to the browser.
+`components/ContactForm.tsx` POSTs to `app/api/contact/route.ts`, which mails the
+lead out over SMTP with [Nodemailer](https://nodemailer.com). The route runs
+server-side, so the mailbox password is never shipped to the browser.
 
 Copy `.env.example` to `.env.local` and fill in:
 
 ```bash
-EMAILJS_SERVICE_ID=service_xxxxxxx
-EMAILJS_TEMPLATE_ID=template_xxxxxxx
-EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxx
-EMAILJS_PRIVATE_KEY=xxxxxxxxxxxxxxxx
+SMTP_USER=leads@example.com          # the mailbox that sends
+SMTP_PASS=xxxxxxxxxxxxxxxx           # Gmail App Password, not the account password
 CONTACT_TO_EMAIL=57grass@gmail.com   # optional, defaults to business.email
 ```
 
-The email body is composed as plain text in the route handler, so the EmailJS
-dashboard template only needs `{{message}}` as its content (with `{{subject}}`
-as the subject and `{{reply_to}}` as the reply-to). Set the template's **To
-Email** to `{{to_email}}`.
+`SMTP_HOST` / `SMTP_PORT` are optional and default to Gmail (`smtp.gmail.com`,
+port 465). Port 587 works too — the route switches to STARTTLS on its own.
 
-Deploying: add the same four variables in the Vercel project's environment
-settings — `.env.local` is gitignored and does not ship.
+**Gmail App Password:** the sending account needs 2-Step Verification on, then
+Google Account → Security → App passwords → generate one for "Mail". Paste the
+16 characters as `SMTP_PASS`; spaces in it are fine.
+
+The email is composed as plain text in the route handler — nothing to configure
+in any dashboard. It sends *from* `SMTP_USER` with the lead's address as
+Reply-To, so replying from the inbox goes straight back to them.
+
+Deploying: add the same variables in the Vercel project's environment settings —
+`.env.local` is gitignored and does not ship.
 
 ## Before launch — client to supply
 
 - Real job-site / project photography (replace everything in `public/images/`).
 - Final copy approval (all copy lives in `lib/content.ts`).
 - Logo file (a placeholder wordmark + beam mark is used in nav/footer).
-- EmailJS service + template IDs for the contact form.
+- Sending-mailbox credentials for the contact form (`SMTP_USER` / `SMTP_PASS`).
 - Domain / DNS pointed at Vercel.
