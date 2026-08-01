@@ -67,8 +67,25 @@ export async function POST(request: Request) {
     process.env;
 
   if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY || !EMAILJS_PRIVATE_KEY) {
-    console.error("[contact] EmailJS env vars are not fully configured.");
-    return Response.json({ error: "Email is not configured." }, { status: 500 });
+    // TEMPORARY DIAGNOSTIC - remove once the Vercel env vars are confirmed working.
+    // Reports variable *names* only, never values. These names are already public
+    // in .env.example, so nothing secret is disclosed.
+    const missing = Object.entries({
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      EMAILJS_PUBLIC_KEY,
+      EMAILJS_PRIVATE_KEY,
+    })
+      .filter(([, v]) => !v)
+      .map(([k]) => k);
+    const emailjsNames = Object.keys(process.env)
+      .filter((k) => k.startsWith("EMAILJS") || k.startsWith("CONTACT_"))
+      .sort();
+    console.error(`[contact] Missing EmailJS env vars: ${missing.join(", ")}`);
+    return Response.json(
+      { error: "Email is not configured.", missing, visibleNames: emailjsNames },
+      { status: 500 },
+    );
   }
 
   let payload: unknown;
