@@ -97,6 +97,10 @@ export async function POST(request: Request) {
         envKeyCount: Object.keys(process.env).length,
         vercelEnv: process.env.VERCEL_ENV ?? null,
         isVercel: process.env.VERCEL ?? null,
+        // Every env var NAME the function can see (never values). Distinguishes
+        // "not attached to this deployment" from "stripped by the edge runtime".
+        allNames: Object.keys(process.env).sort(),
+        edgeRuntime: typeof (globalThis as { EdgeRuntime?: unknown }).EdgeRuntime,
       },
       { status: 500 },
     );
