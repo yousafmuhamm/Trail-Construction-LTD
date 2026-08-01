@@ -119,6 +119,20 @@ const beamGallery: ProjectPhoto[] = [
   { src: "/images/work/beam-30.jpg", alt: "Steel beam spanning a gutted living space" },
   { src: "/images/work/beam-31.jpg", alt: "Steel beam picking up the floor joists above" },
   { src: "/images/work/beam-32.jpg", alt: "New header beam framed into a widened opening" },
+  { src: "/images/work/beam-33.jpg", alt: "Steel beam set into place as the new floor framing goes up" },
+  { src: "/images/work/beam-34.jpg", alt: "Long laminated beam being cut to length in the shop" },
+  { src: "/images/work/beam-35.jpg", alt: "Ceiling opened up to expose the joists before the new beam goes in" },
+  { src: "/images/work/beam-36.jpg", alt: "Steel beam and bracket carrying an exterior overhang" },
+  { src: "/images/work/beam-37.jpg", alt: "Temporary shoring and steel posts holding the structure during a major renovation" },
+  { src: "/images/work/beam-38.jpg", alt: "Steel C-channel and beam laid out on site before installation" },
+  { src: "/images/work/beam-39.jpg", alt: "Steel beam and timber staged in the driveway ahead of the install" },
+  { src: "/images/work/beam-40.jpg", alt: "Main floor ceiling opened up with a temporary support post in place" },
+  { src: "/images/work/beam-41.jpg", alt: "Bolt sleeves set into a steel beam before it is lifted into place" },
+  { src: "/images/work/beam-42.jpg", alt: "W10 steel beam carrying the opening where the bearing wall was removed" },
+  { src: "/images/work/beam-43.jpg", alt: "Magnetic drill boring bolt holes through a steel beam" },
+  { src: "/images/work/beam-44.jpg", alt: "W14 steel beam spanning 30 feet across an opened main floor" },
+  { src: "/images/work/beam-45.jpg", alt: "W8 steel beam and temporary posts carrying the floor above an opened kitchen" },
+  { src: "/images/work/beam-46.jpg", alt: "New beam framed in where the wall between two rooms was removed" },
 ];
 
 const carpentryGallery: ProjectPhoto[] = [
@@ -156,6 +170,15 @@ const carpentryGallery: ProjectPhoto[] = [
   { src: "/images/work/carpentry-32.jpg", alt: "Curved barrel-vault ceiling framed inside a custom home" },
   { src: "/images/work/carpentry-33.jpg", alt: "Carpenter setting a curved plywood form for an arched ceiling" },
   { src: "/images/work/carpentry-34.jpg", alt: "Crane setting a tall framed wall section" },
+  { src: "/images/work/carpentry-35.jpg", alt: "Radial rafters framed out for a round roof" },
+  { src: "/images/work/carpentry-36.jpg", alt: "Complex roof framing with barrel vaults on a custom home" },
+  { src: "/images/work/carpentry-37.jpg", alt: "Barrel-vaulted entry roof framed on a custom home in winter" },
+  { src: "/images/work/carpentry-38.jpg", alt: "Custom wood table built in the shop" },
+  { src: "/images/work/carpentry-39.jpg", alt: "Custom pine cabinet built and fitted on site" },
+  { src: "/images/work/carpentry-40.jpg", alt: "Timber beams and stonework framing a fireplace" },
+  { src: "/images/work/carpentry-41.jpg", alt: "New window opening framed and sealed with air barrier tape" },
+  { src: "/images/work/carpentry-42.jpg", alt: "Mezzanine framing carried on a new laminated beam" },
+  { src: "/images/work/carpentry-43.jpg", alt: "New interior walls framed out during a renovation" },
 ];
 
 const decksGallery: ProjectPhoto[] = [
@@ -167,6 +190,7 @@ const decksGallery: ProjectPhoto[] = [
   { src: "/images/work/decks-06.jpg", alt: "Timber post-and-beam pavilion in a public courtyard" },
   { src: "/images/work/decks-07.jpg", alt: "Pergola and canopy structure on a modern home exterior" },
   { src: "/images/work/decks-08.jpg", alt: "Cedar fence and gate with a steel frame" },
+  { src: "/images/work/decks-09.jpg", alt: "New stair stringers and framing built into a commercial space" },
 ];
 
 const excavationGallery: ProjectPhoto[] = [
