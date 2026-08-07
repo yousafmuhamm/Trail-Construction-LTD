@@ -21,14 +21,14 @@ function PhotoButton({
     <button
       type="button"
       onClick={onClick}
-      className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold transition-colors sm:w-auto ${
-        inverse
-          ? "bg-white text-forest hover:bg-paper"
-          : "bg-brand text-white hover:bg-brand-hover"
+      className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-sm bg-navy px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-hover sm:w-auto ${
+        // On the dark forest card the navy alone barely separates from the
+        // background, so the button gets a hairline to keep its shape readable.
+        inverse ? "ring-1 ring-white/30" : ""
       }`}
     >
       See the Work
-      <span className={inverse ? "text-forest/60" : "text-white/70"}>({count} photos)</span>
+      <span className="text-white/70">({count} photos)</span>
       <Icon name="arrowRight" className="h-4 w-4" />
     </button>
   );
@@ -81,7 +81,7 @@ function SecondaryServiceCard({
         <button
           type="button"
           onClick={onOpen}
-          className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-brand-hover sm:w-fit sm:justify-start"
+          className="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 text-sm font-semibold text-navy transition-colors hover:text-navy-hover sm:w-fit sm:justify-start"
         >
           See the Work
           <span className="text-ink-soft">({service.gallery.length} photos)</span>
